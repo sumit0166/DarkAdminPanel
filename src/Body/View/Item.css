@@ -1,0 +1,181 @@
+.item-body{
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-right: 3%; */
+    grid-template-columns: repeat(5,1fr) 0.4fr;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #d4deff;
+    padding-top: 10px;
+}
+.products{
+    display: flex;
+    gap: 15px;
+    /* align-items: center; */
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.name{
+    font-size: 18px;
+    font-weight: 500;
+    text-align: start;
+    width: auto;
+}
+.category{
+    font-size: 14px;
+    color: grey;
+    text-align: start;
+}
+
+.img{
+    /* background-image: url('../img/mocha.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    width: 30px;
+    height: 40px;
+}
+
+.speciality{
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+.speciality span{
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 2px;
+}
+.checkbox svg{
+    width: 20px;
+    height: auto;
+}
+
+
+.status{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.round{
+    width: 100px;
+    height: 20px;
+    border-radius: 50px;
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1px;
+}
+.round span{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.price{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.description{
+    font-size: 14px;
+    font-weight: 400;
+    width: 220px;
+    height: 48px;
+    text-align: start;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.description span{
+    text-overflow: ellipsis;
+}
+.actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:15px;
+}
+.edit svg{
+    width: 24px;
+    height: auto;
+    stroke-width: 2;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 1000ms;
+}
+
+.edit:hover #pen-outer{
+    transform: translate(-4px,4px);
+} 
+.edit:hover #pen-cap{
+    transform: translate(-4px,4px);
+} 
+.edit svg path{
+    transition-property: transform;
+    transition-duration: 300ms;
+    
+}
+
+.remove{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    transition-property: all;
+    transition-duration: 400ms;
+    cursor: pointer;
+}
+
+.remove:hover > #dust-top{
+    transform: rotate(15deg);
+    padding-bottom: 3px;
+}
+.remove:hover > #dus-top{
+    filter: drop-shadow(0px 2px 4px rgba(255, 0, 0, 0.5));
+}
+
+/* #pen-outer{
+    transform: translate(-4px,4px);
+}
+
+#pen-cap{
+    transform: translate(-4px,4px);
+} */
+
+
+
+
+@media only screen and (max-width: 400px) {
+    .item-body{
+        grid-template-columns: 186px 166px;
+        grid-gap: 20px;
+    }
+    .item-body > div:nth-child(even){
+        width: 150px;
+        justify-content: flex-end
+    }
+    .price > div{
+        background-color: rgba(153, 255, 221, 0.342);
+        padding: 4px;
+        border-radius: 3px;
+    }
+    .actions{
+        width: 150px;
+        justify-content: flex-end
+    }
+    .speciality{
+        width: max-content;
+    }
+    
+
+}

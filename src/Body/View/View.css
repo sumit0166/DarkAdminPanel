@@ -1,0 +1,222 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.body{
+    width: 100%;
+    height: -webkit-fill-available;
+    background-color: #DFE7F0;
+    overflow: hidden;
+    position: absolute;
+
+}
+
+@keyframes animate-left {
+    from{
+        transform: scale(0);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.table{
+    width: 95%;
+    height: 95%;
+    border-radius: 10px;
+    background-color: white;
+    margin: 1%  auto;
+    box-shadow: 0px 0px 40px lightgrey;
+    right: auto;
+    opacity: 1;
+    transform: scale(1);
+    overflow: hidden;
+    position: relative;
+    /* animation-name: animate-left; */
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+.table-body:-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+.table-body:-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 5px grey; */
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+.table-body:-webkit-scrollbar-thumb {
+    background: #000b7a;
+    border-radius: 10px;
+  }
+
+.table-filter{
+    height: 40px;
+    background-color: #F0FFFD;
+    padding: 0 3%;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+.table-filter span{
+    opacity: 50%;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 5px;
+    color: #003a5c;
+}
+.table-filter span:hover{
+    color: red;
+}
+.table-filter-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.table-filter-right > div {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    background: #FFFFFF;
+    border: 0.5px solid rgba(142, 214, 255, 0.5);
+    /* box-shadow: 0px 2px 4px rgba(0, 140, 219, 0.5); */
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* justify-content: center; */
+    padding: 0 5px;
+}
+
+.table-filter-right input{
+    padding: 5px;
+    color: #008CDB;
+    border: none;
+    border-left: 1px solid lightgrey;
+    /* height: 100%; */
+    outline: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+.table-filter-right input::placeholder {
+    color: rgba(0, 140, 219, 0.4);;
+    font-weight: 400;
+  }
+.table-header{
+    height: 40px;
+    background-color: #F2F7FF;
+    padding-left: 3% ;
+    padding-right: 3% ;
+    font-size: 20px;
+    font-weight: 380;
+    color: #B3B3B3;
+    display: grid;
+    grid-template-columns: repeat(5,1fr) 0.4fr;
+    align-items: center;
+    justify-content: left;
+}
+.table-header span {
+    text-align: left;
+    cursor: pointer;
+    color: #000f70;
+}
+
+.table-body{
+    padding-left: 3%;
+    padding-right: 2.75%;
+    height: auto;
+    height: 90%;
+    overflow-y: auto;
+}
+
+.table-body::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+.table-body::-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 5px yellow; */
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+.table-body::-webkit-scrollbar-thumb {
+    background: #000b7a;
+    border-radius: 10px;
+  }
+
+
+
+
+
+
+.prog-cont{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 5px;
+}
+
+.progresBar{
+    background-color: #4757ff;
+    /* width: 10%; */
+    height: 5px;
+    border-radius: 50px;
+    transition-property: width;
+    transition-duration: 400ms;
+    transition-timing-function: cubic-bezier(1,.35,.28,.95);
+    animation-delay: 500ms;
+    animation-duration: 200ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeProgessBar {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+
+
+
+
+
+@media only screen and (max-width: 400px) {
+    .table{
+        margin: 0;
+        border-radius: 0;
+        width: auto; 
+        height: -webkit-fill-available;
+    }
+    .table-body{
+        max-width: 100%;
+        padding-bottom: 20%;
+    }
+    .table-filter-left{
+        display: none;
+    }
+    .table-header{
+        display: none;
+    }
+    .table-filter-right{
+        width: 100%;
+        justify-content: space-between;
+    }
+    .rm-cont{
+        transform: scale(0.65);
+        line-height: 1.5;
+    }
+  }

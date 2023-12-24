@@ -1,0 +1,75 @@
+/* .box{
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 2%;
+    height: 100%;
+} */
+.nav-item{
+    position: relative;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    color: var(--pri-color);
+    border: 1px solid var(--border-color);
+    gap : 5px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    cursor: pointer;
+    background: none;
+    transition: background;
+    transition-duration: 500ms;
+    /* width: 140px; */
+    height: 34px;
+    /* justify-content: center; */
+}
+/* .nav-item:hover {
+    color: white;
+    background: #6871749e;
+    border: none;
+} */
+.nav-logo{
+    display: flex;
+    justify-content: center;
+}
+/* .nav-item:hover > .nav-logo {
+    color: var(--primary);
+} */
+
+.active{
+    color: white;
+    background: var(--border-color);
+    border: none;
+}
+.active-nav-logo{
+    color: var(--primary); 
+    display: flex;
+    justify-content: center;
+    animation-name: flipAnimation;
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes flipAnimation {
+    from{
+        transform: rotateY(0deg);
+    }
+    to{
+        transform: rotateY(360deg);
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .active{
+        background: rgba(255, 193, 193, 0.5) !important;
+        border-radius: 10px;
+        color: #710000;
+        border: none;
+    }
+    .nav-item:hover{
+        background: rgba(255, 193, 193, 0.5);
+        border-radius: 10px;
+        color: #710000;
+    }
+  }

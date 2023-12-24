@@ -1,0 +1,7 @@
+.Body > div:nth-child(1){
+    height: 90vh;
+    background: var(--main-bg);
+    padding: 0 20px;
+    padding-top: 1%;
+    box-sizing: border-box;
+}

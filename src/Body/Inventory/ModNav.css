@@ -1,0 +1,72 @@
+.ModNav{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3%;
+    margin-bottom: 5%;
+    /* cursor: pointer; */
+}
+.modnavlinecont{
+    width: 25px;
+    height: 5px;
+}
+.modnavline{
+    width: 0%;
+    height: 5px;
+    border-radius: 50px;
+    background: transparent;
+}
+.modnavline-active{
+    background: var(--primary);
+    animation-name: linewidth;
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in;
+    /* animation-delay: 200ms; */
+}
+@keyframes linewidth {
+    from{
+        width: 0%;
+    }
+    to{
+        width: 100%;
+    }
+}
+
+.modnavbox{
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    height: 60px;
+    gap: 20px;
+    color: white;
+    width: 210px;
+    transition-property: background, color;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
+}
+.modnavboxlt{
+    color: var(--pri-color);
+}
+.modnavbox-active{
+    color: var(--primary) !important;
+    background: var(--sec-bg);
+}
+.modnavboxrt{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 13px;
+    font-weight: 600;
+    gap: 3px;
+}
+.modnavboxrt > p:nth-child(1){
+    color: var(--pri-color);
+    font-weight: 700;
+    /* font-size: 14px; */
+}

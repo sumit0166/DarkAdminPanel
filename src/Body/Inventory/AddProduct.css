@@ -1,0 +1,158 @@
+.AddProduct{
+    top: 650px;
+    background: var(--main-bg);
+    /* background: pink; */
+    position: fixed;
+    /* width: 100vw; */
+    height: 0;
+    width: 100%;
+    z-index: 1;
+    animation-duration: 400ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+    box-sizing: border-box;
+    /* top: 600px; */
+}
+.up{
+    height: 100vh;
+    animation-name: makeup;
+}
+.down{
+    animation-name: putdown;
+}
+@keyframes makeup {
+    0%{
+        top: 650px;
+        
+    }
+    100%{
+        top: 0;
+
+    }
+}
+
+
+@keyframes putdown {
+    0%{
+        top: 0;
+        height: 100vh;
+    }
+    100%{
+        top: 650px;
+        height: 0;
+    }
+}
+
+.back-btn-box{
+    position: relative;
+    padding: 20px;
+    color: var(--pri-color);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    width: max-content;
+    font-size: 15px;
+    font-weight: 500;
+}
+.back-btn-box:hover{
+    color: var(--primary);
+}
+.back-btn-box > span{
+    height: 23px;
+}
+
+.sub-head{
+    color: var(--pri-color);
+    margin-top: 10px;
+}
+.mod-heading{
+    color: white;
+    margin-top: 10px;
+}
+
+.mod-body-left{
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    width: 30vw;
+}
+.mod-body-right{
+    position: relative;
+    box-sizing: border-box;
+    height: 100%;
+    width: 70vw;
+}
+
+
+
+
+
+
+.mod-footer{
+    position: absolute;
+    bottom: 0;
+    height: 10vh;
+    width: 100%;
+    background: var(--sec-bg);
+    font-size: 13px;
+    color: var(--primary);
+    color: #c2c2c2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.draft-btn, .prev-btn, .next-btn {
+    border: 1px solid var(--primary);
+    border: 1px solid #c2c2c2;
+    border-radius: 10px;
+    width: 120px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in;
+}
+.vert{
+    border-left: 2px solid var(--border-color);
+    width: 1px;
+    height: 35px;
+}
+.prev-btn:hover, .draft-btn:hover{
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.next-btn:hover{
+    border: none;
+    background: var(--primary);
+    color: var(--main-bg);
+}
+
+.next-btn:hover{
+    border: none;
+    background: var(--primary);
+    color: var(--main-bg);
+    animation-name: shadowonclick;
+    animation-duration: 200ms;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in;
+}
+
+@keyframes shadowonclick {
+    from{
+        box-shadow: 0px 0px 0px var(--primary);
+    }
+    to{
+        box-shadow: 0px 0px 12px var(--primary);
+    }
+}

@@ -1,0 +1,149 @@
+
+
+
+.Header{
+    position: relative;
+    background: var(--main-bg);
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+
+.acc-modal{
+    position: absolute;
+    z-index: 2;
+    right: 20px;
+    top: 10vh;
+    background: var(--sec-bg);
+    height: 230px;
+    width: 230px;
+    border-radius: 20px;
+    margin-top: 1px;
+    box-sizing: border-box;
+    /* animation-name: downanimation; */
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes downanimation {
+    from{
+        height: 0px;
+        top: 0;
+    }
+    to{
+        height: 230px;
+        top: 10vh;
+    }
+}
+
+
+
+.h-left{
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    /* width:  10%; */
+}
+
+.h-middle{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 3%;
+}
+
+.rght-btns-box{
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.rght-btns-box > .rght-btn {
+    cursor: pointer;  
+    position: relative;
+    background: #202e36;
+    padding: 6px;
+    box-sizing: border-box;
+    border-radius: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rght-btn > .red_dot{
+    position: absolute;
+    top: 20%;
+    right: 30%;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: red;
+}
+.h-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#setting-btn:hover > svg {
+    transform: rotate(180deg);
+    transition-property: transform;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in;
+}
+
+#noti-btn:hover > svg {
+    transform: rotateY(180deg);
+    transition-property: transform;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+}
+
+.acct-info-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;    
+}
+
+.acc-info-btn{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #f3a952;
+    border: 3px solid #564730;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.acc-info-btn > label {
+    font-weight: 600;
+    padding-bottom: 2px;
+    cursor: pointer;   
+}
+
+.acc-info-arows{
+    display: flex;
+    flex-direction: column;
+    transition-property: gap;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+}
+
+.acct-info-box:hover > .acc-info-arows{
+    gap: 3px;
+}

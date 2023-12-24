@@ -1,0 +1,189 @@
+.rm-cont{
+    width: 571px;
+    height: 360px;
+    background: white;
+    box-shadow: 0px 0px 50px #A0A0A0;
+    border-radius: 10px;
+    margin-top: 5%;
+    padding: 1% 2%;
+    /* width: max-content; */
+}
+
+.rm-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000;
+    
+}
+.rm-header-left{
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+.rm-header-left span{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 39px;
+}
+
+.rm-header-right{
+    cursor: pointer;
+}
+
+.rm-header-right:hover {
+    transform:scale(1.2);
+    transition-property: transform;
+    transition-duration: 200ms;
+}
+
+
+
+
+
+
+.rm-body{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+
+
+.rm-body-top{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.rm-body-top-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* height: max-content; */
+    /* gap: 20px; */
+}
+
+.rm-id{
+    width: max-content;
+    height: 26.5px;
+    background: #E4E5EE;
+    border-radius: 5px;
+    display: flex;
+    gap: 15px;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding:0 1.5%;
+    font-weight: 500;
+    font-size: 19.3231px;
+}
+.rm-id div{
+    border-right: 2px dashed grey;
+    height: 60%;
+}
+
+
+
+
+
+.det-frame{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.rm-lbl{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.rm-text-in{
+    width: 156.72px;
+    height: 26.12px;
+    border-radius: 5px;
+    border-style: none;
+    outline: none;
+    font-weight: 500;
+    box-shadow: 0px 1.74px 3.78px #0f2d5aa8;
+    padding-left: 10px;
+    text-align: left;
+    /* font-size: 20px; */
+}
+
+.rm-upl-box{
+    width: 171.23px;
+    height: 144.56px;
+    position: relative;
+    background: #FFFFFF;
+    border: 1px dashed #010030;
+    box-shadow: 0px 4px 12px rgba(0, 60, 151, 0.5);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rm-upl-box img{
+    width: 171.23px;
+    height: 144.56px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.rm-middle{
+    padding-left: 30px;
+}
+.rm-caution{
+    height: 20px;
+    background: rgba(255, 230, 0, 0.3);
+    border-radius: 5px;
+    color: #999900;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 13px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    width: max-content;
+    padding-right: 20px;
+}
+.caut-icon{
+    height: 18px;
+    width: 26px;
+    background: #FFEA34;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.rm-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.rm-btn{
+    width: 192px;
+    height: 29.71px;
+    color: white;
+    font-weight: 600;
+    font-size: 17.3887px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition-property: transform;
+    transition-duration: 400ms;
+    transition-timing-function: ease-in-out;
+}
+.rm-btn:hover {
+    transform: scale(1.1);
+}
+.remove-btn{
+    background: #FF0000;
+}
+.cancel-btn{
+    background: #07C807;
+}

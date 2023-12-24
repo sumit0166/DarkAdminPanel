@@ -1,0 +1,132 @@
+.filt-cont{
+    position: absolute;
+    width: 223px;
+    height: 0px;
+    left: 1083px;
+    top: 76px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    z-index: 1;
+    padding: 1%;
+    box-shadow: 2px 2px 12px #000f708e;
+    color: #000f70;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    animation-name: animateDown;
+    animation-duration: 200ms;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in;
+    /* overflow: auto; */
+    opacity: 0;
+}
+
+
+
+.filt-cont::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  /* Track */
+.filt-cont::-webkit-scrollbar-track {
+    /* box-shadow: inset 0 0 5px yellow; */
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+.filt-cont::-webkit-scrollbar-thumb {
+    background: #000b7a;
+    border-radius: 10px;
+  }
+@keyframes animateDown {
+    from{
+        height: 0px;
+        opacity: 0;
+    }
+    to{
+        height: fit-content;
+        opacity: 1;
+    }
+}
+
+.filt-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000f70;
+    color: black;
+}
+
+.filt-top-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 18px;
+    gap:8px;
+}
+.filt-top-right{
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
+}
+.filt-top-right:hover{
+    cursor: pointer;
+    transform: scale(1.3);
+}
+.filt-middle{
+    display: flex;
+    font-weight: 500;
+    justify-content: space-between;
+}
+
+.filt-middle-left, .filt-middle-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.filt-middle select{
+    width: 92px;
+    height: 24px;
+    background: #FFFFFF;
+    border: none;
+    /* border: 0.2px solid rgba(0, 19, 69, 0.2); */
+    box-shadow: 1px 1px 4px rgb(0 19 69 / 60%);
+    border-radius: 6px;
+    padding: 1%;
+}
+.filt-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.filt-btn{
+    font-size: 14px;
+    color: white;
+    width: 98px;
+    height: 24px;
+    background: #FF5757;
+    border-radius: 4.32039px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.filt-btn:active{
+    background: #000f70;
+}
+
+
+@media only screen and (max-width: 400px) {
+    .filt-cont{
+        left: auto;
+        top: 40px;
+        right: 10px;
+        padding: 10px;
+    }
+  }
