@@ -6,7 +6,7 @@
     /* width: 100vw; */
     height: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 999;
     animation-duration: 400ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
@@ -132,13 +132,20 @@
     border-color: var(--primary);
 }
 
-.next-btn:hover{
-    border: none;
-    background: var(--primary);
-    color: var(--main-bg);
-}
 
 .next-btn:hover{
+    transform: translate(-2px, -2px);
+    box-shadow: 2px 2px 12px var(--primary-bg);
+}
+.next-btn:active{
+    transform: translate(0px, 0px);
+    box-shadow: none;
+}
+
+
+
+
+/* .next-btn:hover{
     border: none;
     background: var(--primary);
     color: var(--main-bg);
@@ -146,7 +153,7 @@
     animation-duration: 200ms;
     animation-fill-mode: both;
     animation-timing-function: ease-in;
-}
+} */
 
 @keyframes shadowonclick {
     from{

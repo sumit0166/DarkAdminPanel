@@ -18,11 +18,23 @@
     border-radius: 50px;
     cursor: pointer;
     background: none;
+    transition-property: transform;
     transition: background;
     transition-duration: 500ms;
+    transition-timing-function: ease-in;
     /* width: 140px; */
     height: 34px;
     /* justify-content: center; */
+}
+
+.nav-item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 4px 12px #010a0e;
+}
+
+.nav-item:active {
+    transform: translate(0px, 0px);
+    box-shadow: none;
 }
 /* .nav-item:hover {
     color: white;
@@ -42,6 +54,9 @@
     background: var(--border-color);
     border: none;
 }
+
+
+
 .active-nav-logo{
     color: var(--primary); 
     display: flex;

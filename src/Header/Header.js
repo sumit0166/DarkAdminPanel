@@ -50,7 +50,7 @@ function Logout(){
 
       <div className="h-left">
         <OceanProtocol size="38" color="#39db7d" variant="Bold"/>
-        <span>InfroTec</span>
+        <span>Test</span>
       </div>
       <div className="h-middle">
 
@@ -76,8 +76,8 @@ function Logout(){
         <div className="acc-info-btn" onClick={Logout}><label>S</label></div>
           {/* <div className="acc-info-btn" onClick={() => setViewModal(!viewModal)}><label>S</label></div> */}
           <div className="acc-info-arows">
-            <ArrowUp2 size="10" color="#6C6C6C" variant="Bold"/>
-            <ArrowDown2 size="10" color="#6C6C6C" variant="Bold"/>
+            <ArrowUp2 size="10" variant="Bold"/>
+            <ArrowDown2 size="10" variant="Bold"/>
           </div>
         </div>
       </div>

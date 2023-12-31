@@ -46,3 +46,4 @@ function AddProduct({modalControl}) {
 }
 
 export default AddProduct;
+
