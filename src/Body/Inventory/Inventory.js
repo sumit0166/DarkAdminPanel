@@ -17,6 +17,7 @@ function Inventory({setViewAddPrd}) {
 
     ]
 
+
 //   function makeActive(){
 //     headVars.setActivePage(Text);
 //   }
