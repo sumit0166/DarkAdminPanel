@@ -1,14 +1,14 @@
-import Header from './Header/Header';
-import Body from './Body/Body';
-import NavMobile from './Header/NavMobile'
+import Header from './frontend/Header/Header';
+import Body from './frontend/Body/Body';
+import NavMobile from './frontend/Header/NavMobile'
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import Login from './Login';
+import Login from './frontend/Login';
 import { Toaster } from 'react-hot-toast';
 
 import {selectLogin} from './redux/LoginSlice'
 import { useSelector } from 'react-redux'
-import AddProduct from './Body/Inventory/AddProduct';
+import AddProduct from './frontend/Body/Inventory/AddProduct';
 
 
 function App() {

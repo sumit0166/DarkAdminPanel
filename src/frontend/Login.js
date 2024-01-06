@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 
 import './Login.css'
 import { useDispatch } from 'react-redux'
-import { loggedin } from './redux/LoginSlice'
+import { loggedin } from '../redux/LoginSlice'
 import { EyeSlash, Eye, CloudConnection } from 'iconsax-react';
 
 

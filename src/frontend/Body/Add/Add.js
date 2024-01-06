@@ -3,7 +3,7 @@ import { useState } from "react";
 // import { useForm } from "react-hook-form";
 import { ArrowRight, NoteAdd } from 'iconsax-react';
 import { collection, addDoc } from "firebase/firestore";
-import db from '../../Firebase'
+import db from '../../../Firebase'
 import toast from 'react-hot-toast';
 
 

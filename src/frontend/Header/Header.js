@@ -1,9 +1,8 @@
 import './Header.css';
-import Logo from '../img/logo.png';
 import Navparam from './Navparam';
 import { OceanProtocol, Bag, BinanceUsd, Setting2, Notification, ArrowDown2, ArrowUp2, Note1, PresentionChart, Folder2, ShoppingCart } from 'iconsax-react';
 import {  useDispatch } from 'react-redux'
-import { loggedout } from '../redux/LoginSlice'
+import { loggedout } from '../../redux/LoginSlice'
 import { useState } from 'react';
 
 function Header({headVars}) {
