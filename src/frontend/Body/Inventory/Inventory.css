@@ -471,10 +471,10 @@
     border-radius: 10px;
     box-sizing: border-box;
     background: var(--sec-bg);
-    animation-name: productEntry;
+    /* animation-name: productEntry;
     animation-duration: 500ms;
     animation-duration: 500ms;
-    animation-timing-function: ease-in;
+    animation-timing-function: ease-in; */
     animation-fill-mode: both;
     transition-property: all;
     transition-duration: 500ms;

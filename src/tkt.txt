@@ -2,6 +2,14 @@ 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
 docker run -d --name dashboard -v /root/node/dash:/root/node/app --net node -p 3000:3000 nodeapp
 docker run -d -p 27017:27017 --name mongodb mongo
 
+FROM node:latest
+WORKDIR /root/node/app
+RUN npm install
+CMD ["npm", "start"]
+
+
+docker build -t nodeapp .
+
 docker run -d --name dashboard -v /root/node/dash:/root/node/app --network nodeapp -p 3000:3000 nodeapp
 docker run -d --name mongodb --network nodeapp -v /root/node/dash/db:/data/db -p 27017:27017 mongo
 docker run -d --name mongo-express --network nodeapp -p 8081:8081 -e ME_CONFIG_MONGODB_SERVER=mongodb -e ME_CONFIG_MONGODB_PORT=27017 mongo-express

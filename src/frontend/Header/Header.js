@@ -4,42 +4,17 @@ import { OceanProtocol, Bag, BinanceUsd, Setting2, Notification, ArrowDown2, Arr
 import {  useDispatch } from 'react-redux'
 import { loggedout } from '../../redux/LoginSlice'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Header({headVars}) {
   const dispatch = useDispatch()
-  const [viewModal, setViewModal] = useState(false)
+  const [viewModal, setViewModal] = useState(false);
+  const navigate= useNavigate();
 
-
-//   function handleView(e) {
-//       data.setView(true);
-//       data.setAdd(false);
-//       data.setRm(false);
-//       data.setPass(false);
-// }
-
-  // function handleAdd(e) {
-  //     data.setView(false);
-  //     data.setAdd(true);
-  //     data.setRm(false);
-  //     data.setPass(false);
-  // }
-  
-//   function handleRm(e) {
-//       data.setView(false);
-//       data.setAdd(false);
-//       data.setRm(true);
-//       data.setPass(false);
-// }
-
-// function PassChange(e) {
-//       data.setView(false);
-//       data.setAdd(false);
-//       data.setRm(false);
-//       data.setPass(true);
-// }
 
 function Logout(){
     dispatch(loggedout())
+    navigate("/Login")
 }
 
 

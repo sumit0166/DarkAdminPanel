@@ -6,10 +6,15 @@ import { ArrangeVerticalSquare, ClipboardText,Shapes, DollarCircle } from 'icons
 import FilterBtns from './FilterBtns';
 import SelectBox from './SelectBox';
 import ShowProduct from './ShowProduct';
+// import autoAnimate from '@formkit/auto-animate'
 // import React, { useState } from 'react';
 
 function Inventory({setViewAddPrd}) {
     const [selectView, setSelectView] = useState("List");
+
+
+
+      
     var imgs = [
         "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/0cf53065f4e443f0a0c245cdbccbb43d_9366/GRIP-ED_RUN_SHOES_Black_IQ8998_01_standard.jpg",
         "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/63c259ebedee4ae3a9f2af5e012d65c2_9366/BREEZEWALK_SHOES_Pink_GC0553_01_standard.jpg",
@@ -142,7 +147,7 @@ function Inventory({setViewAddPrd}) {
                     </div>
                 </div>
 
-                <div className="product-cont">
+                <div className="product-cont" >
                     <ShowProduct variant="6" type="Men" stock="10" img={imgs[0]} />
                     <ShowProduct variant="3" type="Women" stock="0" img={imgs[1]} />
                     <ShowProduct type="Casual" stock="210" img={imgs[2]} />
