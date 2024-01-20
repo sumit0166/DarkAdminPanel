@@ -6,7 +6,7 @@ import { loggedin } from '../redux/LoginSlice'
 import { EyeSlash, Eye, CloudConnection } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
-
+import axios from 'axios';
 // import app from '../backend/database';
 
 
@@ -14,40 +14,69 @@ function Login() {
     const [validCred, setValidCred] = useState(true);
     const dispatch = useDispatch()
     const [showPass, setShowPass] = useState(false)
-    const username = useRef();
-    const password = useRef();
+    const username = useRef(null);
+    const password = useRef(null);
     const navigate= useNavigate();
+
+    // const [postData, setPostData] = useState({ username: '', passwd: '' });
+    // const handleInputChange = (e) => {
+    //     setValidCred(true);
+    //     const { name, value } = e.target;
+    //     setPostData({ ...postData, [name]: value });
+    //   };
     
 
-    const handleClick = (e) => {
-        e.preventDefault()
-        console.log(username.current.value, password.current.value)
+     const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(username.current.value, password.current.value);
         if (username.current.value !== '' && password.current.value !== '') {
-            if (username.current.value === 'admin' && password.current.value === '1234') {
-                localStorage.setItem("isAlreadyLogin", true);
-                dispatch(loggedin({
-                    user: username.current.value
-                }))
-                navigate("/Inventory")
-            } else {
-                setValidCred(false)
-                username.current.value = '';
-                password.current.value = '';
-                toast.error("Wrong Userame or Password.\n Please try again...",{
-                    style:{
-                        width: '80%',
-                        fontSize:'16px',
-                        fontWeight:'600',
-                        color: "red",
-                    },
-                });
+        try {
+            // Make a POST request using axios
+            const response = await axios.post('http://linux3:3001/getLogin?operation=userAuth', {username:username.current.value , passwd:password.current.value});
+            console.log(response.data);
+
+                if (response.data.isAuthSuccesfull) {
+                    localStorage.setItem("isAlreadyLogin", true);
+                    dispatch(loggedin({
+                        user: username.current.value,
+                        roles: response.data.roles
+                    }))
+                    navigate("/Inventory")
+                } else {
+                    setValidCred(false)
+                    username.current.value = '';
+                    password.current.value = '';
+                    toast.error("Wrong Userame or Password.\n Please try again...",{
+                        style:{
+                            width: '80%',
+                            fontSize:'16px',
+                            fontWeight:'600',
+                            color: "red",
+                        },
+                    });
+                }
+                
+            } catch (error) {
+                // Handle errors
+                console.error('Error making POST request:', error.message);
             }
+        } else {
+            setValidCred(false)
+            toast.error("Please provide all fields",{
+                style:{
+                    width: '80%',
+                    fontSize:'16px',
+                    fontWeight:'600',
+                    color: "red",
+                },
+            });
         }
-    
     }
+
+
     return (
         <div className="container">
-            <form className="login-box" onSubmit={ (e) => handleClick(e)}>
+            <form className="login-box" onSubmit={ e => handleSubmit(e)}>
                 <div className="top">
                     <CloudConnection size="90" color="var(--primary)" variant="TwoTone"/>
                 </div>
@@ -61,6 +90,7 @@ function Login() {
                                 type="text" 
                                 name='username' 
                                 ref={username} 
+                                // value={postData.username} onChange={handleInputChange}
                                 onChange={() => setValidCred(true)}
                             />
                         </div>
@@ -69,8 +99,9 @@ function Login() {
                             <input 
                                 style={{borderColor: !validCred ? "red" : ""}} 
                                 type={showPass ? "text" : "password"} 
-                                name='password' 
+                                name='passwd' 
                                 ref={password} 
+                                // value={postData.passwd} onChange={handleInputChange}
                                 onChange={() => setValidCred(true)}
                              />
                             <div className="showpass" onClick={ () => setShowPass(!showPass) } >
@@ -88,9 +119,7 @@ function Login() {
                             <span>Forgotten your password?</span>
                         </div>
                     </div>
-                    <button type="submit" className="logIn" 
-                        // onClick={handleClick}
-                    >
+                    <button type="submit" className="logIn" >
                         <span>Login</span>
                     </button>
                 </div>
