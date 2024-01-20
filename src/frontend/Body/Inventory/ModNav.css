@@ -43,7 +43,7 @@
     align-items: center;
     height: 60px;
     gap: 20px;
-    color: white;
+    color: var(--pri-font-color);
     width: 210px;
     transition-property: background, color;
     transition-duration: 300ms;

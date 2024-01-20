@@ -11,6 +11,7 @@
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
+    color: var(--pri-font-color);
 }
 
 
@@ -52,6 +53,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 5px;
+    color: var(--pri-font-color);
     /* width:  10%; */
 }
 
@@ -74,6 +76,7 @@
     cursor: pointer;  
     position: relative;
     background: #202e36;
+    background: var(--primary-bg-transp);
     padding: 6px;
     box-sizing: border-box;
     border-radius: 35%;
@@ -124,7 +127,7 @@
     height: 28px;
     border-radius: 50%;
     background-color: #f3a952;
-    border: 3px solid #564730;
+    border: 3px solid #f3a952;
     display: flex;
     justify-content: center;
     align-items: center;

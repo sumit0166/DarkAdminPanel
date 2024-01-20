@@ -6,11 +6,12 @@ import { ArrangeVerticalSquare, ClipboardText,Shapes, DollarCircle } from 'icons
 import FilterBtns from './FilterBtns';
 import SelectBox from './SelectBox';
 import ShowProduct from './ShowProduct';
-// import autoAnimate from '@formkit/auto-animate'
 // import React, { useState } from 'react';
 
 function Inventory({setViewAddPrd}) {
     const [selectView, setSelectView] = useState("List");
+
+
 
 
 
@@ -114,7 +115,7 @@ function Inventory({setViewAddPrd}) {
                            <div className="sort-box">
                                 <SelectBox 
                                     options={["All Product","Tea","Coffe","Dessert"]}
-                                    ICON={Shapes } 
+                                    ICON={Shapes} 
                                     />   
                            </div>
                         </div>

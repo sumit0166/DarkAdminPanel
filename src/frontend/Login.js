@@ -49,7 +49,7 @@ function Login() {
         <div className="container">
             <form className="login-box" onSubmit={ (e) => handleClick(e)}>
                 <div className="top">
-                    <CloudConnection size="90" color="#39db7d" variant="TwoTone"/>
+                    <CloudConnection size="90" color="var(--primary)" variant="TwoTone"/>
                 </div>
                 <div className="bottom">
                     <div className="heading"><span>Login</span></div>

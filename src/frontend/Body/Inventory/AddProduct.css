@@ -1,10 +1,8 @@
 .AddProduct{
-    top: 650px;
+    top: 0;
     background: var(--main-bg);
-    /* background: pink; */
     position: fixed;
-    /* width: 100vw; */
-    height: 0;
+    height: 100vh;
     width: 100%;
     z-index: 999;
     animation-duration: 400ms;
@@ -12,9 +10,8 @@
     animation-fill-mode: forwards;
     overflow: hidden;
     box-sizing: border-box;
-    /* top: 600px; */
 }
-.up{
+/* .up{
     height: 100vh;
     animation-name: makeup;
 }
@@ -32,7 +29,6 @@
     }
 }
 
-
 @keyframes putdown {
     0%{
         top: 0;
@@ -42,7 +38,7 @@
         top: 650px;
         height: 0;
     }
-}
+} */
 
 .back-btn-box{
     position: relative;
@@ -68,7 +64,7 @@
     margin-top: 10px;
 }
 .mod-heading{
-    color: white;
+    color: var(--pri-font-color);
     margin-top: 10px;
 }
 

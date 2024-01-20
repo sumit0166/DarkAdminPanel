@@ -1,15 +1,25 @@
 import { useState } from 'react';
 import './AddProduct.css';
-import { ArrowLeft2, DocumentText1 } from 'iconsax-react';
+import { ArrowLeft2, DocumentText1, HashtagDown } from 'iconsax-react';
 import ModNav from './ModNav';
 // import React, { useState } from 'react';
 
 function AddProduct({modalControl}) {
     const [activeModalNav, setActiveModalNav] = useState(1);
     const [modHeading, setModHeading] = useState("Genral Information");
-    console.log(activeModalNav)
+    // console.log(activeModalNav)
+
+    const handleSubmit = () => {
+        setActiveModalNav(activeModalNav+1);
+        if (activeModalNav == 4) {
+            setActiveModalNav(1);
+            modalControl.setViewAddPrd(false);
+        }
+    }
+
     return (
-            <form className={ modalControl.viewAddPrd ? "AddProduct up" : "AddProduct"} >
+            // <form className={ modalControl.viewAddPrd ? "AddProduct up" : "AddProduct"} >
+             <form className="AddProduct" >
                 <div className="back-btn-box"
                     onClick={() => modalControl.setViewAddPrd(false)}
                 >
@@ -37,9 +47,8 @@ function AddProduct({modalControl}) {
                     <div className="vert"></div>
                     { activeModalNav > 1 && <div className="prev-btn" onClick={() => setActiveModalNav(activeModalNav-1)}>Previous</div>}
                     {/* { activeModalNav < 6 && <button type={activeModalNav == 5 ? 'submit' : 'button'} className ="next-btn mfb-active" onClick={() => setActiveModalNav(activeModalNav+1)}>{activeModalNav == 4 ? "Submit" : "Next"}</button>} */}
-                    { <button type={activeModalNav == 5 ? 'submit' : 'button'} className ="next-btn " onClick={() => setActiveModalNav(activeModalNav+1)}>{activeModalNav == 4 ? "Submit" : "Next"}</button>}
+                    { <div className ="next-btn" onClick={handleSubmit}>{activeModalNav == 4 ? "Submit" : "Next"}</div>}
                 </div>
-    
             </form>
 
     );

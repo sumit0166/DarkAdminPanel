@@ -38,7 +38,7 @@ function SelectBox({isActive, options, name, ICON}) {
             <div className="selectbox-main" onClick={extendSelect} >
                 <ICON size="22" variant="Bold"/>
                 { name && <span>{name}:</span>}
-                <span className="sortSelected">{selected == "Clear" ? "" : selected}</span>
+                <span className="sortSelected" >{selected == "Clear" ? "" : selected}</span>
                 <ArrowDown2 size="20" variant="Bold" ref={svg}/>
             </div>
             <div className="selectbox-opt-cont" ref={selectBoxCont}>

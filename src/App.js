@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import AddProduct from './frontend/Body/Inventory/AddProduct';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 
 
@@ -16,29 +17,33 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 
 function App() {
+  const [animationParent] = useAutoAnimate();
   const [activePage, setActivePage] = useState("Inventory");
   const [isMobile, setMobile] = useState(window.innerWidth <= 768);
   const [viewAddPrd, setViewAddPrd] = useState(false);
   const login = useSelector(selectLogin)
+  const [uiMode, SetUiMode] = useState(localStorage.getItem("activeUiMode"));
 
 
   const loginComp = !login ? <Login /> : <Navigate to="/Inventory"/>;
-  const headerComp = login && <Header headVars={{ activePage, setActivePage }} />;
+  const headerComp = login && <Header headVars={{ activePage, setActivePage, uiMode, SetUiMode }} />;
   const bodyComp = login && <Body headVars={{ activePage, setActivePage, setViewAddPrd }} />;
-  const addProdComp = < AddProduct modalControl={{viewAddPrd, setViewAddPrd}}/>;
+  const addProdComp = viewAddPrd && <AddProduct modalControl={{viewAddPrd, setViewAddPrd}}/>;
+
+
 
   return (
-    <div className="App">
+    <div className={uiMode ? "App" : "App-dark"}>
       <Toaster   position="top-right" reverseOrder={false} />
 
       <Routes>
         <Route exact path="/" element={ <Navigate to="/Login" element={loginComp} />} />
         <Route exact path="/Login" element={loginComp}/>
-        
       </Routes>
 
-      {/* {loginComp} */}
-      {addProdComp}
+      <div ref={animationParent}>
+        {addProdComp}
+      </div>
       {headerComp}
       {bodyComp}
     

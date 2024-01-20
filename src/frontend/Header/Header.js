@@ -17,6 +17,10 @@ function Logout(){
     navigate("/Login")
 }
 
+function toogleModes() {
+  localStorage.setItem("activeUiMode",!headVars.uiMode);
+  headVars.SetUiMode(!headVars.uiMode);
+}
 
   return (
     <div className="Header">
@@ -37,12 +41,12 @@ function Logout(){
 
       </div>
       <div className="h-right">
-        <div className="rght-btns-box">
+        <div className="rght-btns-box" onClick={toogleModes}>
           <div className="rght-btn" id='setting-btn'>
-            <Setting2 size="20" color="#bec3c3" variant="Bold"/>
+            <Setting2 size="20" variant="Bold"/>
           </div>
           <div className="rght-btn" id='noti-btn'>
-            <Notification size="20" color="#bec3c3" variant="Bold"/>
+            <Notification size="20" variant="Bold"/>
             <div className="red_dot"></div>
           </div>
         </div>

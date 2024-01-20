@@ -16,10 +16,10 @@
 
 .inv-head-lft{
     position: relative;
-    color: white;
+    color: var(--pri-font-color);
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     width: max-content;
     gap: 10px;
 }
@@ -50,7 +50,7 @@
     padding-left: 20px;
 }
 .inv-search-box{
-    background: #010a0e;
+    background: var(--inv-search-box);
     height: 35px;
     width: -webkit-fill-available;
     position: relative;
@@ -58,7 +58,7 @@
     border-radius: 10px;
     border: 2px solid var(--search-border);
     display: flex;
-    color: white;
+    color: var(--pri-color);;
     padding: 5px 10px;
     display: flex;
     align-items: center;
@@ -91,7 +91,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    border-left: 1px solid #282828;
+    border-left: 1px solid var(--border-color);
     cursor: pointer;
 }
 .scan-cont > span{
@@ -131,7 +131,7 @@
 
 
 .vert-line{
-    border-left: 2px solid #282828;
+    border-left: 2px solid var(--border-color);
     height: 35px;
 }
 
@@ -161,7 +161,7 @@
     position: relative;
     box-sizing: border-box;
     cursor: pointer;
-    color: var(--main-bg);
+    color: white;
     background: var(--primary);
     width: 120px;
     height: 35px;
@@ -200,7 +200,7 @@
     position: absolute;
     bottom: 0;
     box-sizing: border-box;
-    color: white;
+    color: var(--pri-font-color);
     width: 100%;
     height: 60px;
     background: var(--sec-bg);
@@ -256,7 +256,7 @@
     width: 100%;
     height: 35px;
     border: 1px solid var(--border-color);
-    color: white;
+    color: var(--pri-font-color);
     border-radius: 10px;
     display: grid;
     grid-template-columns: 0.2fr 0.8fr;
@@ -277,7 +277,7 @@
     border: none;
     background: transparent;
     padding-left: 10px;
-    color: white;
+    color: var(--pri-font-color);
     font-size: 15px;
 }
 .money-inp::placeholder{
@@ -307,7 +307,7 @@
     height: 35px;
     border-radius: 10px;
     border: 1px solid var(--border-color);
-    color: white;
+    color: var(--pri-font-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -354,7 +354,6 @@
     grid-template-columns: 1fr;
     transition-property: all;
     transition-duration: 200ms;
-    
 }
 .selectbox-main{
     box-sizing: border-box;
@@ -375,7 +374,7 @@
     font-weight: 600;
     /* outline: none;
     border: none; */
-    color: white;
+    color: var(--pri-font-color);
     min-width: 30%;     
 }
 
@@ -393,7 +392,7 @@
     display: flex;
     flex-direction: column;
     /* gap: 5px; */
-    color: white;
+    color: var(--pri-font-color);
     font-size: 14px;
     text-align: center;
     border-radius: 10px;
@@ -407,6 +406,7 @@
 .selectbox-opt-cont > span{
     padding: 8px 5px;
     border-radius: 5px;
+    transition: none !important;
     /* border-bottom: 1px solid var(--border-color); */
 }
 .selectbox-opt-cont > span:hover{
@@ -442,9 +442,9 @@
     height: fit-content;
     max-height: 100% !important;
     overflow-y: auto;
-    transition-property: all;
+    /* transition-property: all;
     transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out; */
     /* height: 120vh; */
     /* padding-right: 10px ; */
 }
@@ -476,12 +476,12 @@
     animation-duration: 500ms;
     animation-timing-function: ease-in; */
     animation-fill-mode: both;
-    transition-property: all;
+    /* transition-property: all;
     transition-duration: 500ms;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out; */
     animation-delay: 100ms;
     padding: 8px 10px;
-    color: white;
+    color: var(--pri-font-color);
     text-align: left;
     display: grid;
     grid-template-columns: 0.48fr 2fr 0.1fr 0.8fr 0.8fr 0.3fr;
@@ -517,11 +517,11 @@
     display: flex;
     font-size: 14px;
     gap: 10px;
-    font-weight: 700;
+    font-weight: 500;
 }
 .det-opts > .varient{
-    color: black;
-    font-weight: 700;
+    color: var(--inv-pri-font-color);
+    font-weight: 500;
     padding: 0 5px;
     border-radius: 6px;
     background: var(--primary);

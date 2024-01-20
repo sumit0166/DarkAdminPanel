@@ -1,4 +1,6 @@
-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
+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
+
+
 docker run -d --name dashboard -v /root/node/dash:/root/node/app --net node -p 3000:3000 nodeapp
 docker run -d -p 27017:27017 --name mongodb mongo
 

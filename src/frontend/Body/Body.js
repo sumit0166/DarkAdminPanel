@@ -2,6 +2,7 @@ import './Body.css';
 import View from './View/View';
 import Inventory from './Inventory/Inventory';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 const NotFound = () => {
   return (
@@ -31,16 +32,16 @@ const styles = {
 
 
 function Body({headVars}) {
-
+  const [animationParent] = useAutoAnimate();
   const invePage = <Inventory setViewAddPrd={headVars.setViewAddPrd}/>;
 
   return (
-    <div className="Body">
+    <div className="Body" ref={animationParent}>
       {/* {headVars.activePage == "Inventory" ? <Inventory setViewAddPrd={headVars.setViewAddPrd}/>  : null} */}
 
       <Routes>
-        {/* <Route path="*" element={ <Navigate to="/404" /> } /> */}
         <Route exact path="Inventory" element={invePage} />
+        {/* <Route path="*" element={ <Navigate to="/404" /> } /> */}
         <Route path="/404" element={<NotFound />} />
       </Routes>
 

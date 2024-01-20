@@ -1,9 +1,40 @@
-.App {
-  text-align: center;
-  background-color: #DFE7F0;
+*{
+
+  transition-property:  background, background-color, border;
+  transition-duration: 500ms;
+  transition-timing-function: ease-in;
 }
 
+.App-dark {
+  text-align: center;
+  background-color: #DFE7F0;
+  --inv-pri-font-color: #003656;
+  --pri-font-color: white;
+  --main-bg: #141e22;
+  --sec-bg: #1a262d;
+  --ter-bg: #202e36;
+  --primary: #39db7d;
+  --border-color: #80a59042;
+  --pri-color: #74817f;
+  --primary-bg-transp: #39db7d2b;
+  --inv-search-box: #010a0e;
 
+}
+
+.App{
+  text-align: center;
+  background-color: #DFE7F0;
+  --inv-pri-font-color: white;
+  --pri-font-color: #003656;
+  --main-bg: #f6fcff;
+  --sec-bg: #e4f5ff;
+  --ter-bg: #cee9f9;
+  --primary: #0074b9;
+  --border-color: #c6ddeb;
+  --pri-color: #188d7b;
+  --primary-bg-transp: #7fcdfb;
+  --inv-search-box: #e2f5ff;
+}
 
 .App-logo {
   height: 40vmin;

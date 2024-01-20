@@ -29,12 +29,13 @@
 
 .nav-item:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 3px 4px 12px #010a0e;
+    box-shadow: 3px 4px 12px var(--inv-search-box);
 }
 
 .nav-item:active {
     transform: translate(0px, 0px);
     box-shadow: none;
+    
 }
 /* .nav-item:hover {
     color: white;
@@ -58,7 +59,7 @@
 
 
 .active-nav-logo{
-    color: var(--primary); 
+    color: var(--primary) !important; 
     display: flex;
     justify-content: center;
     animation-name: flipAnimation;

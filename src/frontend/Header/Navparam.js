@@ -17,7 +17,7 @@ function Navparam({Icon,Text }) {
 
           <div className={isActive ? "nav-item active":"nav-item"}>
               <div className={isActive ? "active-nav-logo" :"nav-logo"}> {Icon} </div>
-              <span>{Text}  </span>
+              <span style={{ color: "var(--pri-font-color)" }}>{Text}  </span>
           </div>
         </NavLink>
 
