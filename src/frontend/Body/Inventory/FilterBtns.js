@@ -5,10 +5,6 @@ import { DocumentText1 } from 'iconsax-react';
 
 function FilterBtns({isActive, name, count}) {
 
-    if(isActive){
-
-        console.log("If loop executed..")
-    }
 
     return (
         <div className={ isActive ? "FilterBtns FilterBtns-active" :"FilterBtns"} >

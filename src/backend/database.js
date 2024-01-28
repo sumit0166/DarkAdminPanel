@@ -21,16 +21,23 @@ app.post('/getLogin', (req, res) => {
 
   switch (operation) {
     case "userAuth":
-      console.log(req, req.body)
+      console.log(req.body)
       var username = req.body.username;
       var passwd = req.body.passwd;
       userModel.findOne({username: username, passwd: passwd })
       .then( users => {
-        if(users.username == username && users.passwd == passwd){ 
-          res.json({
-            isAuthSuccesfull: true,
-            roles: users.roles
-          })
+        if(users !== null){
+          if(users.username == username && users.passwd == passwd){ 
+            res.json({
+              isAuthSuccesfull: true,
+              roles: users.roles
+            })
+          } else {
+            res.json({
+              isAuthSuccesfull: false,
+            })
+          }
+
         } else {
           res.json({
             isAuthSuccesfull: false,
@@ -38,7 +45,10 @@ app.post('/getLogin', (req, res) => {
         }
         
       })
-      .catch( err => res.json(err))
+      .catch( err => {
+        console.log(err);
+        res.json(err);
+      })
       
       break;
   

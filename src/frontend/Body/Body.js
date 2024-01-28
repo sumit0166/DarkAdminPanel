@@ -13,6 +13,7 @@ const NotFound = () => {
   );
 };
 
+
 const styles = {
   container: {
     textAlign: 'center',
@@ -30,19 +31,19 @@ const styles = {
 };
 
 
-
 function Body({headVars}) {
   const [animationParent] = useAutoAnimate();
   const invePage = <Inventory setViewAddPrd={headVars.setViewAddPrd}/>;
+
 
   return (
     <div className="Body" ref={animationParent}>
       {/* {headVars.activePage == "Inventory" ? <Inventory setViewAddPrd={headVars.setViewAddPrd}/>  : null} */}
 
       <Routes>
-        <Route exact path="Inventory" element={invePage} />
-        {/* <Route path="*" element={ <Navigate to="/404" /> } /> */}
-        <Route path="/404" element={<NotFound />} />
+        <Route path="/Inventory" element={invePage} />
+        {/* <Route path="/404" element={} index={1} /> */}
+        {/* <Route path="/*" element={ <Navigate to="/404" element={<NotFound />} /> } /> */}
       </Routes>
 
     </div>

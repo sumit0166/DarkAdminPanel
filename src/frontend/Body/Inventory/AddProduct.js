@@ -1,27 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './AddProduct.css';
 import { ArrowLeft2, DocumentText1, HashtagDown } from 'iconsax-react';
 import ModNav from './ModNav';
+import { useNavigate } from 'react-router-dom';
 // import React, { useState } from 'react';
 
 function AddProduct({modalControl}) {
     const [activeModalNav, setActiveModalNav] = useState(1);
     const [modHeading, setModHeading] = useState("Genral Information");
+    const navigate = useNavigate()
     // console.log(activeModalNav)
 
     const handleSubmit = () => {
         setActiveModalNav(activeModalNav+1);
         if (activeModalNav == 4) {
             setActiveModalNav(1);
+            navigate("/Inventory")
             modalControl.setViewAddPrd(false);
+
         }
     }
+
+    // navigate('/Inventory/addProduct?'+modHeading, { replace: true })
+    useEffect(() => { navigate('/Inventory/addProduct?'+modHeading, { replace: true }) },[modHeading])
+
 
     return (
             // <form className={ modalControl.viewAddPrd ? "AddProduct up" : "AddProduct"} >
              <form className="AddProduct" >
                 <div className="back-btn-box"
-                    onClick={() => modalControl.setViewAddPrd(false)}
+                    onClick={() => {
+                        navigate("/Inventory")
+                        modalControl.setViewAddPrd(false)
+                    }}
                 >
                     <ArrowLeft2 size="23" variant="Bold"/>
                     <span>Back to product list</span>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Inventory.css';
 
 import { More, Element3, RowVertical, SearchNormal1, Scan, Refresh } from 'iconsax-react';
@@ -6,16 +6,40 @@ import { ArrangeVerticalSquare, ClipboardText,Shapes, DollarCircle } from 'icons
 import FilterBtns from './FilterBtns';
 import SelectBox from './SelectBox';
 import ShowProduct from './ShowProduct';
+import { useNavigate } from 'react-router-dom';
 // import React, { useState } from 'react';
+
 
 function Inventory({setViewAddPrd}) {
     const [selectView, setSelectView] = useState("List");
 
+    const navigate = useNavigate()
 
-
-
-
+    function verifySession(id) {
+        let decoded = Number(atob(atob(id).split('_')[1]));
+        console.log("before Decode >>", decoded)
+        let decodedTime = new Date(decoded);
+        console.log("after Decode >>", decodedTime)
+        let cur_time = new Date();
+        console.log("curr_time: ",cur_time," Old time: ",decodedTime);
+        if (cur_time >= decodedTime) {
+          return true;
+        } else{
+          return false;
+        }
+      } 
+    
       
+      useEffect(() => {
+          var isSessionExpired = verifySession(localStorage.getItem("sessionId"));
+          console.log("isSeesionExpired",isSessionExpired);
+        if (isSessionExpired) {
+        //   navigate('/SessionExpired');
+        }
+      }, []);
+
+
+
     var imgs = [
         "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/0cf53065f4e443f0a0c245cdbccbb43d_9366/GRIP-ED_RUN_SHOES_Black_IQ8998_01_standard.jpg",
         "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/63c259ebedee4ae3a9f2af5e012d65c2_9366/BREEZEWALK_SHOES_Pink_GC0553_01_standard.jpg",
@@ -63,7 +87,10 @@ function Inventory({setViewAddPrd}) {
                         <div className="more-btn">
                             <More size="24" />
                         </div>
-                        <div className="add-product-btn" onClick={() => setViewAddPrd(true)} ><h5 >Add Product</h5 ></div>
+                        <div className="add-product-btn" onClick={() => {
+                            navigate('/Inventory/addProduct', { replace: true });
+                            setViewAddPrd(true);
+                        }} ><h5 >Add Product</h5 ></div>
                    </div>
                 </div>
 

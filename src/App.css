@@ -1,9 +1,9 @@
-*{
+/* *{
 
   transition-property:  background, background-color, border;
   transition-duration: 500ms;
   transition-timing-function: ease-in;
-}
+} */
 
 .App-dark {
   text-align: center;
@@ -103,4 +103,27 @@
   to{
       opacity: 0;
   }
+}
+
+
+.SessionExp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--sec-bg);
+  text-align: center;
+}
+
+.SessionExp h1 {
+  font-size: 2.5rem;
+  color: var(--pri-font-color);
+  margin-bottom: 1rem;
+}
+
+.SessionExp p {
+  font-size: 1.2rem;
+  color: var(--pri-color);
+  margin-top: 0;
 }

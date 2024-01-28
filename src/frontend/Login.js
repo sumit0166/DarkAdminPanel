@@ -7,6 +7,8 @@ import { EyeSlash, Eye, CloudConnection } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 import axios from 'axios';
+import LodingGif from '../img/load.gif';
+
 // import app from '../backend/database';
 
 
@@ -17,17 +19,35 @@ function Login() {
     const username = useRef(null);
     const password = useRef(null);
     const navigate= useNavigate();
+    const [isLoding, setLoading] = useState(false)
 
-    // const [postData, setPostData] = useState({ username: '', passwd: '' });
-    // const handleInputChange = (e) => {
-    //     setValidCred(true);
-    //     const { name, value } = e.target;
-    //     setPostData({ ...postData, [name]: value });
-    //   };
-    
+
+    var errorStyle = {
+        width: '80%',
+        fontSize:'16px',
+        fontWeight:'600',
+        color: 'var(--pri-font-color)',
+        background:"var(--inv-search-box)",
+        boxShadow: '4px 6px 12px rgb(90 90 90 / 38%)',
+        font: "font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace"
+    }
+
+
+
+    function expireTime(hrs) {
+        var now = new Date();
+        let expireTime = now.setMinutes(now.getMinutes() + hrs);
+        return btoa(expireTime);
+    }
+
+
+
+
+
 
      const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         console.log(username.current.value, password.current.value);
         if (username.current.value !== '' && password.current.value !== '') {
         try {
@@ -41,35 +61,34 @@ function Login() {
                         user: username.current.value,
                         roles: response.data.roles
                     }))
-                    navigate("/Inventory")
+                    var sessionId = btoa(username.current.value+"_"+expireTime(1))
+                    localStorage.setItem("sessionId",sessionId);
+                    navigate("/Inventory");
+                    setLoading(true);
                 } else {
                     setValidCred(false)
                     username.current.value = '';
                     password.current.value = '';
                     toast.error("Wrong Userame or Password.\n Please try again...",{
-                        style:{
-                            width: '80%',
-                            fontSize:'16px',
-                            fontWeight:'600',
-                            color: "red",
-                        },
+                        style: errorStyle,
                     });
+                    setLoading(false);
                 }
                 
             } catch (error) {
                 // Handle errors
-                console.error('Error making POST request:', error.message);
+                console.error( error.message);
+                setLoading(false);
+                toast.error(error.message.toLowerCase(),{
+                    style: errorStyle,
+                });
             }
         } else {
             setValidCred(false)
             toast.error("Please provide all fields",{
-                style:{
-                    width: '80%',
-                    fontSize:'16px',
-                    fontWeight:'600',
-                    color: "red",
-                },
+                style: errorStyle,
             });
+            setLoading(false);
         }
     }
 
@@ -119,8 +138,11 @@ function Login() {
                             <span>Forgotten your password?</span>
                         </div>
                     </div>
-                    <button type="submit" className="logIn" >
+                    <button type="submit" className="logIn" disabled={!validCred}>
                         <span>Login</span>
+                        {isLoding && <div className="loading"></div>}
+    
+
                     </button>
                 </div>
             </form>
