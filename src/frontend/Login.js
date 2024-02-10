@@ -7,19 +7,23 @@ import { EyeSlash, Eye, CloudConnection } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 import axios from 'axios';
-import LodingGif from '../img/load.gif';
+
+const response = await fetch('/config.json');
+const config = await response.json();
+
+
 
 // import app from '../backend/database';
 
 
 function Login() {
     const [validCred, setValidCred] = useState(true);
-    const dispatch = useDispatch()
     const [showPass, setShowPass] = useState(false)
+    const [isLoding, setLoading] = useState(false)
+    const dispatch = useDispatch();
     const username = useRef(null);
     const password = useRef(null);
-    const navigate= useNavigate();
-    const [isLoding, setLoading] = useState(false)
+    const navigate = useNavigate();
 
 
     var errorStyle = {
@@ -29,15 +33,34 @@ function Login() {
         color: 'var(--pri-font-color)',
         background:"var(--inv-search-box)",
         boxShadow: '4px 6px 12px rgb(90 90 90 / 38%)',
-        font: "font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace"
+        font: "font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace"
     }
 
 
 
     function expireTime(hrs) {
         var now = new Date();
-        let expireTime = now.setMinutes(now.getMinutes() + hrs);
-        return btoa(expireTime);
+        let expireTime
+        switch (config.sessionExpiredType) {
+            case "Hrs":
+                expireTime = now.setHours(now.getHours() + hrs);
+                return btoa(expireTime);
+            case "Mins":
+                let expireTime = now.setMinutes(now.getMinutes() + hrs);
+                return btoa(expireTime);
+            default:
+                console.log(">>Invalid sessionExpiredType Value");
+                break;
+        }
+
+
+        if (config.sessionExpiredType == "Hrs") {
+            let expireTime = now.setHours(now.getHours() + hrs);
+            return btoa(expireTime);
+        } else{
+            let expireTime = now.setMinutes(now.getMinutes() + hrs);
+            return btoa(expireTime);
+        }
     }
 
 
@@ -52,18 +75,22 @@ function Login() {
         if (username.current.value !== '' && password.current.value !== '') {
         try {
             // Make a POST request using axios
-            const response = await axios.post('http://linux3:3001/getLogin?operation=userAuth', {username:username.current.value , passwd:password.current.value});
+            const response = await axios.post(config.host +'/getLogin?operation=userAuth', {username:username.current.value , passwd:password.current.value});
             console.log(response.data);
 
                 if (response.data.isAuthSuccesfull) {
                     localStorage.setItem("isAlreadyLogin", true);
+                    
+                    let configData = config.roles;
+                    // let userConfig = configData[response.data.roles];
                     dispatch(loggedin({
                         user: username.current.value,
-                        roles: response.data.roles
+                        roles: response.data.roles,
+                        userConfig: configData[response.data.roles]
                     }))
-                    var sessionId = btoa(username.current.value+"_"+expireTime(1))
+                    var sessionId = btoa(username.current.value+"_"+expireTime(config.sessionExpiredTime))
                     localStorage.setItem("sessionId",sessionId);
-                    navigate("/Inventory");
+                    navigate(config.defaultPage);
                     setLoading(true);
                 } else {
                     setValidCred(false)

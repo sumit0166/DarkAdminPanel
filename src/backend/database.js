@@ -2,13 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const userModel = require('./userModel')
+const config = require('./serverConfig.json');
 
 const app = express();
 app.use(cors());
 
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/adminPanel');
+// mongoose.connect('mongodb://localhost:27017/adminPanel');
+mongoose.connect('mongodb://'+config.dbHost+':'+ config.port +'/'+ config.dbName);
+
+app.use((req, res, next) => {
+  console.log(`Received ${req.method} request at ${req.url}`);
+  next();
+});
 
 app.get('/getusers', (req, res) => {
   userModel.find()
@@ -18,7 +25,6 @@ app.get('/getusers', (req, res) => {
 
 app.post('/getLogin', (req, res) => {
   const operation = req.query.operation;
-
   switch (operation) {
     case "userAuth":
       console.log(req.body)
@@ -59,8 +65,8 @@ app.post('/getLogin', (req, res) => {
 
 })
 
-app.listen(3001, () => {
-  console.log('server is running')
+app.listen(config.serverPort, () => {
+  console.log('server is running on port >',config.serverPort);
 })
 
 

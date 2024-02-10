@@ -1,4 +1,4 @@
-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
+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
 
 
 docker run -d --name dashboard -v /root/node/dash:/root/node/app --net node -p 3000:3000 nodeapp

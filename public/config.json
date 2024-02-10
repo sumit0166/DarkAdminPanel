@@ -1,0 +1,17 @@
+{
+    "sessionExpiredType" : "Mins",
+    "sessionExpiredTime": 1,
+    "host": "http://webapp:3001",
+    "defaultPage": "/Inventory",
+    "roles" : {
+        "read_only": {
+            "accessDeniedPages": [
+                "/Order",
+                "/Sales"
+            ]
+        },
+        "super": {
+            "accessDeniedPages": []
+        }
+    }
+} 

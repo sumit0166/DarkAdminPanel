@@ -38,19 +38,30 @@ function AddProduct({modalControl}) {
                     <span>Back to product list</span>
                 </div>
                 <div className="sub-head">
-                    <h3>Add New Product</h3>
+                    <span>Add New Product</span>
                 </div>
                 <div className="mod-heading">
-                    <h2>{modHeading}</h2>
+                    <span>{modHeading}</span>
                 </div>
+                
+                <div className="modal-mid-cont">
+                    <div className="mod-body-left">
+                        <ModNav stepno="1" setModHeading={setModHeading} subhead="Genral Information" isActive={activeModalNav == 1 }/>
+                        <ModNav stepno="2" setModHeading={setModHeading} subhead="Sales Information" isActive={activeModalNav == 2 }/>
+                        <ModNav stepno="3" setModHeading={setModHeading} subhead="Quantity & Recorder" isActive={activeModalNav == 3}/>
+                        <ModNav stepno="4" setModHeading={setModHeading} subhead="Measurement" isActive={activeModalNav == 4}/>
+                    </div>
+                    <div className="mod-body-right">
+                        <div className="mbr-box1">
 
-                <div className="mod-body-left">
-                    <ModNav stepno="1" setModHeading={setModHeading} subhead="Genral Information" isActive={activeModalNav == 1 }/>
-                    <ModNav stepno="2" setModHeading={setModHeading} subhead="Sales Information" isActive={activeModalNav == 2 }/>
-                    <ModNav stepno="3" setModHeading={setModHeading} subhead="Quantity & Recorder" isActive={activeModalNav == 3}/>
-                    <ModNav stepno="4" setModHeading={setModHeading} subhead="Measurement" isActive={activeModalNav == 4}/>
-                </div>
-                <div className="mod-body-right">
+                            <div className="img-box">
+                                <span>Image</span>
+                                <div className="img-select"></div>
+                                <div className="img-upload"></div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
                 <div className="mod-footer">
