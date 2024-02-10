@@ -1,5 +1,5 @@
 {
-    "sessionExpiredType" : "Mins",
+    "sessionExpiredType" : "Hrs",
     "sessionExpiredTime": 1,
     "host": "http://webapp:3001",
     "defaultPage": "/Inventory",

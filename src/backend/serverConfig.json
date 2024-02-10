@@ -1,6 +1,0 @@
-{
-  "serverPort": 3001,
-  "dbHost": "localhost",
-  "port":"27017",
-  "dbName":"adminPanel"
-}

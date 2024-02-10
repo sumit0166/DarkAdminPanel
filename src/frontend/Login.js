@@ -2,11 +2,12 @@ import { useRef, useState } from 'react'
 
 import './Login.css'
 import { useDispatch } from 'react-redux'
-import { loggedin } from '../redux/LoginSlice'
+import { loggedin, loggedout } from '../redux/LoginSlice'
 import { EyeSlash, Eye, CloudConnection } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 import axios from 'axios';
+// import config from '../config.json'
 
 const response = await fetch('/config.json');
 const config = await response.json();
@@ -40,26 +41,14 @@ function Login() {
 
     function expireTime(hrs) {
         var now = new Date();
-        let expireTime
         switch (config.sessionExpiredType) {
             case "Hrs":
-                expireTime = now.setHours(now.getHours() + hrs);
-                return btoa(expireTime);
+                return btoa(now.setHours(now.getHours() + hrs));
             case "Mins":
-                let expireTime = now.setMinutes(now.getMinutes() + hrs);
-                return btoa(expireTime);
+                return btoa(now.setMinutes(now.getMinutes() + hrs));
             default:
                 console.log(">>Invalid sessionExpiredType Value");
                 break;
-        }
-
-
-        if (config.sessionExpiredType == "Hrs") {
-            let expireTime = now.setHours(now.getHours() + hrs);
-            return btoa(expireTime);
-        } else{
-            let expireTime = now.setMinutes(now.getMinutes() + hrs);
-            return btoa(expireTime);
         }
     }
 
@@ -73,42 +62,66 @@ function Login() {
         setLoading(true);
         console.log(username.current.value, password.current.value);
         if (username.current.value !== '' && password.current.value !== '') {
+            console.log(config)
         try {
             // Make a POST request using axios
             const response = await axios.post(config.host +'/getLogin?operation=userAuth', {username:username.current.value , passwd:password.current.value});
-            console.log(response.data);
+            console.log(response.data.statusCode);
 
-                if (response.data.isAuthSuccesfull) {
-                    localStorage.setItem("isAlreadyLogin", true);
+                switch (response.data.statusCode) {
+                    case 200:
+                        if (response.data.isAuthSuccesfull) {
+                            localStorage.setItem("isAlreadyLogin", true);
+                            
+                            let configData = config.roles;
+                            // let userConfig = configData[response.data.roles];
+                            dispatch(loggedin({
+                                user: username.current.value,
+                                roles: response.data.roles,
+                                userConfig: configData[response.data.roles]
+                            }))
+                            var sessionId = btoa(username.current.value+"_"+expireTime(config.sessionExpiredTime))
+                            localStorage.setItem("sessionId",sessionId);
+                            navigate(config.defaultPage);
+                            setLoading(true);
+                        } else {
+                            setValidCred(false)
+                            username.current.value = '';
+                            password.current.value = '';
+                            toast.error("Wrong Userame or Password.\n Please try again...",{
+                                style: errorStyle,
+                            });
+                            setLoading(false);
+                        }
+                        break;
+
+                    case 201:
+                        setValidCred(false)
+                        username.current.value = '';
+                        password.current.value = '';
+                        setLoading(false);
+                        toast.error('User not found, Please try again',{ style: errorStyle, });
+                        break;
                     
-                    let configData = config.roles;
-                    // let userConfig = configData[response.data.roles];
-                    dispatch(loggedin({
-                        user: username.current.value,
-                        roles: response.data.roles,
-                        userConfig: configData[response.data.roles]
-                    }))
-                    var sessionId = btoa(username.current.value+"_"+expireTime(config.sessionExpiredTime))
-                    localStorage.setItem("sessionId",sessionId);
-                    navigate(config.defaultPage);
-                    setLoading(true);
-                } else {
-                    setValidCred(false)
-                    username.current.value = '';
-                    password.current.value = '';
-                    toast.error("Wrong Userame or Password.\n Please try again...",{
-                        style: errorStyle,
-                    });
-                    setLoading(false);
+                    case 400:
+                        setLoading(false);
+                        toast.error('Request Error! \n operation not found',{ style: errorStyle, });
+                        break;
+
+                    default:
+                        setLoading(false);
+                        console.log(response.data.statusCode," - Wrong Status code");
+                        toast.error(response.data.statusCode," - Wrong Status Code",{ style: errorStyle, });
+                        break;
                 }
-                
             } catch (error) {
                 // Handle errors
-                console.error( error.message);
+                console.log(error.message);
                 setLoading(false);
                 toast.error(error.message.toLowerCase(),{
                     style: errorStyle,
                 });
+                dispatch(loggedout())
             }
         } else {
             setValidCred(false)

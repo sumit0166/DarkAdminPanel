@@ -1,0 +1,12 @@
+{
+  "serverPort": 3001,
+  "dbHost": "localhost",
+  "port":"27017",
+  "dbName":"adminPanel",
+  "logs" : {
+    "path": "logs/%DATE%.log",
+    "mode":"info",
+    "size": "20m",
+    "retantionPeriod": "14d"
+  }
+}
