@@ -3,6 +3,7 @@
   "dbHost": "localhost",
   "port":"27017",
   "dbName":"adminPanel",
+  "originHost":"http://webapp:3000",
   "logs" : {
     "path": "logs/%DATE%.log",
     "mode":"info",

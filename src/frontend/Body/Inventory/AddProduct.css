@@ -53,6 +53,7 @@
     font-size: 15px;
     font-weight: 500;
 }
+
 .back-btn-box:hover{
     color: var(--primary);
 }
@@ -178,7 +179,7 @@
     position: relative;
     background: var(--sec-bg);
     width: 60%;
-    height: 350px;
+    /* height: 350px; */
     box-sizing: border-box;
     border-radius: 10px;
 }
@@ -186,14 +187,102 @@
     text-align: left;
 }
 .img-box{
+    box-sizing: border-box;
+    position: relative;
     color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* max-height: 50vh; */
+    /* overflow: auto; */
+}
+/* .img-box::-webkit-scrollbar {
+    width: 0px;
+} */
+.img-select{
+    position: relative;
+    border: 2px dashed var(--addProd-border-color);
+    width: 100%;
+    height: 160px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+}
+.img-select > .is-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.img-box > .shofiles-cont{
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    max-height: 250px !important;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.img-select{
+
+.img-box > .shofiles-cont::-webkit-scrollbar{
+    width: 20px;
+}
+
+
+.ShowFiles{
+    box-sizing: border-box;
+    position: relative;
     border: 1px solid var(--addProd-border-color);
     width: 100%;
-    height: 160px;
+    height: 40px;
     border-radius: 5px;
+    /* cursor: pointer; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+    gap: 10px;
+}
+.ShowFiles > .imu-loader{
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: var(--primary-bg-transp);
+    transition: width 800ms ease-in-out;
+    border-radius: 3 px;
+}
+.ShowFiles > .imu-span{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.ShowFiles > .cancel-ico{
+    position: absolute;
+    box-sizing: border-box;
+    right: 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.ShowFiles > .iml-img {
+    border-radius: 2px;
+    /* background-size: 10%; */
+    width: 30px;
+    height: 30px;
+    /* background: url('https://www.wearcomet.com/cdn/shop/files/Lateral-View1-min.jpg?v=1698135135&width=600'); */
+}
+
+.img-select >  #img-inp{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
 }

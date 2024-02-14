@@ -1,6 +1,6 @@
 {
     "sessionExpiredType" : "Hrs",
-    "sessionExpiredTime": 1,
+    "sessionExpiredTime": 5,
     "host": "http://webapp:3001",
     "defaultPage": "/Inventory",
     "roles" : {

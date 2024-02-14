@@ -2,7 +2,7 @@
 
 process_name="node"
 script_name="backendServer.js"
-app_path="../"
+app_path=".."
 
 SartProcess (){
     if ! command -v "$process_name" &> /dev/null; then
@@ -11,17 +11,21 @@ SartProcess (){
     fi
 
     # Check Node.js version
-    required_version="20.11.0"  # Replace with your required version
-    current_version="$("$process_name" --version | cut -c 2-)"
+    # required_version="21.5.0"  # Replace with your required version
+    # current_version="$("$process_name" --version | cut -c 2-)"
 
-    if [[ "$current_version" != "$required_version" ]]; then
-        echo "Node.js version $required_version is required. Current version is $current_version."
-        echo "Exiting process.."
-        exit 1
-    fi
+    # if [[ "$current_version" != "$required_version" ]]; then
+    #     echo "Node.js version $required_version is required. Current version is $current_version."
+    #     echo "Exiting process.."
+    #     exit 1
+    # fi
 
     # Check if the required npm packages are installed
-    required_packages=$(jq -r '.dependencies | keys | join(" ")' "$app_path/config/package.json")
+
+    
+    
+
+    required_packages=$(jq -r '.dependencies | keys | join(" ")' "$app_path/package.json")
     for package in $required_packages; do
         echo "Checking package... $package"
         if ! "$process_name" -e "require('$package')" &> /dev/null; then
@@ -32,6 +36,7 @@ SartProcess (){
 
     cd "$app_path" || exit 1
     nohup "$process_name" "$script_name" > /dev/null 2>&1 &
+    # "$process_name" "$script_name"
     echo "Process $script_name started."
 }
 

@@ -5,8 +5,10 @@ import {  useDispatch, useSelector } from 'react-redux'
 import { loggedout, selectLogin } from '../../redux/LoginSlice'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const response = await fetch('/config.json');
 const config = await response.json();
+
 
 function Header({headVars}) {
   const dispatch = useDispatch()
@@ -29,6 +31,16 @@ function Header({headVars}) {
   function toogleModes() {
     headVars.SetUiMode(!headVars.uiMode);
     localStorage.setItem("activeUiMode",headVars.uiMode);
+  }
+
+  
+  async function getNotis() {
+    try {
+      const response = await axios.get(config.host +'/getusers');
+      console.log(response.data);
+    } catch (error) {
+      console.error(`Got ERROR while fetching info ${error}`)
+    }
   }
 
   const navigationItems = [
@@ -66,11 +78,11 @@ function Header({headVars}) {
 
       </div>
       <div className="h-right">
-        <div className="rght-btns-box" onClick={toogleModes}>
-          { roles.includes("super") && <div className="rght-btn" id='setting-btn'>
+        <div className="rght-btns-box" >
+          { roles.includes("super") && <div className="rght-btn" id='setting-btn' onClick={toogleModes}>
             <Setting2 size="20" variant="Bold"/>
           </div>}
-          <div className="rght-btn" id='noti-btn'>
+          <div className="rght-btn" id='noti-btn' onClick={getNotis}>
             <Notification size="20" variant="Bold"/>
             <div className="red_dot"></div>
           </div>

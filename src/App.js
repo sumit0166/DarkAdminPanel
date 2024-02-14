@@ -63,7 +63,7 @@ const SessionExp = () => {
 
 const AuthenticatedApp = ({argu}) => {
   const [activePage, setActivePage] = useState("Inventory");
-  const [viewAddPrd, setViewAddPrd] = useState(false);
+  const [viewAddPrd, setViewAddPrd] = useState(true);
   const [animationParent] = useAutoAnimate();
   const {uiMode, SetUiMode} = argu;
 
@@ -84,6 +84,7 @@ const AuthenticatedApp = ({argu}) => {
 function App() {
   const [uiMode, SetUiMode] = useState(false);
   const login = useSelector(selectLogin);
+  // const login = useSelector(selectLogin);
   const nav = useNavigate()
 
 
@@ -127,8 +128,8 @@ function App() {
 
       <Routes>
 	      <Route path="/" element={ login ? <Navigate to={config.defaultPage} /> : <Navigate to="/Login" /> }  />
-        <Route path='/SessionExpired' element={ <SessionExp />}  index={1} />
-        <Route path="/Login" element={loginComp} index={0} />
+        <Route path="/Login" element={loginComp} index={1} />
+        <Route path='/SessionExpired' element={ <SessionExp />}  index={2} />
         <Route path='/*' element={isSeesionExpired ? <Navigate to="/SessionExpired" /> : !login && <NotFound /> } />
       </Routes>
 
