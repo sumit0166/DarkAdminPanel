@@ -504,8 +504,9 @@
     width: 70px;
     height: 100%;
     border-radius: 10px;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 .details-cont{
     display: flex;
@@ -569,4 +570,22 @@
 
 .more-opt-cont:active{
     transform: translate(0px, 0px) !important;
+}
+
+.ShowProduct > .zoomIMageCont{
+    display: none;
+    cursor: pointer;
+}
+
+.photo-cont:hover + .zoomIMageCont, .zoomIMageCont:hover{
+    display: block;
+    top: -50%;
+    position: absolute;
+    border-radius: 10px;
+    /* background: green; */
+    width: 200px;
+    height: 250px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
 }

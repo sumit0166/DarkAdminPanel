@@ -63,7 +63,7 @@ const SessionExp = () => {
 
 const AuthenticatedApp = ({argu}) => {
   const [activePage, setActivePage] = useState("Inventory");
-  const [viewAddPrd, setViewAddPrd] = useState(true);
+  const [viewAddPrd, setViewAddPrd] = useState(false);
   const [animationParent] = useAutoAnimate();
   const {uiMode, SetUiMode} = argu;
 
@@ -127,13 +127,13 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
 
       <Routes>
-	      <Route path="/" element={ login ? <Navigate to={config.defaultPage} /> : <Navigate to="/Login" /> }  />
+	      <Route path="/" element={ login && !isSeesionExpired ? <Navigate to={config.defaultPage} /> : <Navigate to="/Login" /> }  />
         <Route path="/Login" element={loginComp} index={1} />
         <Route path='/SessionExpired' element={ <SessionExp />}  index={2} />
-        <Route path='/*' element={isSeesionExpired ? <Navigate to="/SessionExpired" /> : !login && <NotFound /> } />
+        <Route path='/*' element={login && !isSeesionExpired ? <AuthenticatedApp argu={{uiMode, SetUiMode}}/> : <Navigate to="/SessionExpired" /> } />
       </Routes>
 
-      {login && !isSeesionExpired && <AuthenticatedApp argu={{uiMode, SetUiMode}}/> }
+      {/* {login && !isSeesionExpired && <AuthenticatedApp argu={{uiMode, SetUiMode}}/> } */}
     
     </div>
   );

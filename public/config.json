@@ -3,6 +3,7 @@
     "sessionExpiredTime": 5,
     "host": "http://webapp:3001",
     "defaultPage": "/Inventory",
+    "maxImageUpload": 4,
     "roles" : {
         "read_only": {
             "accessDeniedPages": [

@@ -1,5 +1,5 @@
 const logger = require("./logger");
-const userModel = require("./userModel");
+const { userModel, productModel } = require('./dbModals')
 
 
 
@@ -12,6 +12,7 @@ const getLogin = (req, res) =>{
       var passwd = req.body.passwd;
       userModel.findOne({ username: username })
         .then(users => {
+          
           if (users !== null) {
             if (users.username == username && users.passwd == passwd) {
               let resp = {
@@ -22,7 +23,6 @@ const getLogin = (req, res) =>{
               logger.info(`Authentication sucessful \n Response sent -> ${JSON.stringify(resp)}`)
               res.json(resp)
             } else {
-
               let resp = {
                 statusCode: 200,
                 isAuthSuccesfull: false,
@@ -30,7 +30,6 @@ const getLogin = (req, res) =>{
               logger.info(`Authentication failed \n Response sent -> ${JSON.stringify(resp)}`)
               res.json(resp)
             }
-
           } else {
             let resp = {
               statusCode: 2001,

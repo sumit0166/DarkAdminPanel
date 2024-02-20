@@ -2,41 +2,73 @@ import { useEffect, useState } from 'react';
 import './Inventory.css';
 
 import { More, Element3, RowVertical, SearchNormal1, Scan, Refresh } from 'iconsax-react';
-import { ArrangeVerticalSquare, ClipboardText,Shapes, DollarCircle } from 'iconsax-react';
+import { ArrangeVerticalSquare, ClipboardText, Shapes, DollarCircle } from 'iconsax-react';
 import FilterBtns from './FilterBtns';
 import SelectBox from './SelectBox';
 import ShowProduct from './ShowProduct';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 // import React, { useState } from 'react';
+const response = await fetch('/config.json');
+const config = await response.json();
 
+function verifySession(id) {
+    let decoded = Number(atob(atob(id).split('_')[1]));
+    console.log("before Decode >>", decoded)
+    let decodedTime = new Date(decoded);
+    console.log("after Decode >>", decodedTime)
+    let cur_time = new Date();
+    console.log("curr_time: ", cur_time, " Old time: ", decodedTime);
+    if (cur_time >= decodedTime) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
-function Inventory({setViewAddPrd}) {
+function Inventory({ setViewAddPrd }) {
     const [selectView, setSelectView] = useState("List");
-
+    const [products, setProducts] = useState([]);
     const navigate = useNavigate()
+    const [animationParent] = useAutoAnimate();
 
-    function verifySession(id) {
-        let decoded = Number(atob(atob(id).split('_')[1]));
-        console.log("before Decode >>", decoded)
-        let decodedTime = new Date(decoded);
-        console.log("after Decode >>", decodedTime)
-        let cur_time = new Date();
-        console.log("curr_time: ",cur_time," Old time: ",decodedTime);
-        if (cur_time >= decodedTime) {
-          return true;
-        } else{
-          return false;
+    const fetchProducts = async () => {
+        const response = await axios.get(config.host +'/getProudcts');
+        switch (response.data.opStatus) {
+            case 200:
+                setProducts(response.data.data);
+                break;
+            
+            case 404:
+                toast.error(response.data.message);
+                break;
+
+            default:
+                if(response.data.error){
+                    toast.error(`Unknown error fetching data ${response.data.error}`);
+                }
+                break;
         }
-      } 
-    
-      
-      useEffect(() => {
-          var isSessionExpired = verifySession(localStorage.getItem("sessionId"));
-          console.log("isSeesionExpired",isSessionExpired);
+    }
+
+    useEffect(() => {
+        var isSessionExpired = verifySession(localStorage.getItem("sessionId"));
+        console.log("isSeesionExpired", isSessionExpired);
         if (isSessionExpired) {
-        //   navigate('/SessionExpired');
+            //   navigate('/SessionExpired');
         }
-      }, []);
+        try {
+            fetchProducts();
+        } catch (error) {
+            console.log(error)
+        }
+
+
+    }, []);
+
+
 
 
 
@@ -47,141 +79,147 @@ function Inventory({setViewAddPrd}) {
 
     ]
 
-//   function makeActive(){
-//     headVars.setActivePage(Text);
-//   }
+    //   function makeActive(){
+    //     headVars.setActivePage(Text);
+    //   }
 
-  return (
+    return (
         <div className="Inventory">
-                <div className="inv-head-lft">
-                    <div className="inv-heading"><h2>Product</h2></div>
-                    <div className="inv-count"><h5>1320</h5><span>total products</span></div>
+            <div className="inv-head-lft">
+                <div className="inv-heading"><h2>Product</h2></div>
+                <div className="inv-count"><h5>1320</h5><span>total products</span></div>
+            </div>
+            <div className="inv-head-right">
+                <div className="inv-search-box">
+                    <div className="inv-search-icon">
+                        <SearchNormal1 size="20" variant="Bulk" />
+                    </div>
+                    <input type="text" className="inv-search-inp" placeholder='search...' />
+                    <div className="scan-cont">
+                        <Scan size="20" color='var(--primary)' variant="Bold" />
+                        <span>Scan</span>
+                    </div>
                 </div>
-                <div className="inv-head-right">
-                    <div className="inv-search-box">
-                        <div className="inv-search-icon">
-                            <SearchNormal1 size="20" variant="Bulk"/>
-                        </div>
-                        <input type="text" className="inv-search-inp" placeholder='search...'/>
-                        <div className="scan-cont">
-                            <Scan size="20" color='var(--primary)' variant="Bold"/>
-                            <span>Scan</span>
-                        </div>
+                <div className="inv-view">
+                    <div className={selectView == "List" ? "inv-view-btn i-v-b-active" : "inv-view-btn"}
+                        onClick={() => setSelectView("List")}
+                    >
+                        <RowVertical size="18" variant="Bold" />
                     </div>
-                    <div className="inv-view">
-                        <div className={selectView == "List" ? "inv-view-btn i-v-b-active" : "inv-view-btn"}
-                            onClick={() => setSelectView("List")}
-                        >
-                            <RowVertical size="18" variant="Bold"/>
-                        </div>
-                        <div className={selectView == "Grid" ? "inv-view-btn i-v-b-active" : "inv-view-btn"}
-                            onClick={() => setSelectView("Grid")}
-                        >       
-                            <Element3 size="18" variant="Bold"/>
-                        </div>
+                    <div className={selectView == "Grid" ? "inv-view-btn i-v-b-active" : "inv-view-btn"}
+                        onClick={() => setSelectView("Grid")}
+                    >
+                        <Element3 size="18" variant="Bold" />
                     </div>
-                    <div className="vert-line">
-
-                    </div>
-                   <div className="more-box">
-                        <div className="more-btn">
-                            <More size="24" />
-                        </div>
-                        <div className="add-product-btn" onClick={() => {
-                            navigate('/Inventory/addProduct', { replace: true });
-                            setViewAddPrd(true);
-                        }} ><h5 >Add Product</h5 ></div>
-                   </div>
                 </div>
+                <div className="vert-line">
 
-            
-                <div className="filter-cont">
-                    <div className="main-filt-box-wrap">
+                </div>
+                <div className="more-box">
+                    <div className="more-btn">
+                        <More size="24" />
+                    </div>
+                    <div className="add-product-btn" onClick={() => {
+                        navigate('/Inventory/addProduct', { replace: true });
+                        setViewAddPrd(true);
+                    }} ><h5 >Add Product</h5 ></div>
+                </div>
+            </div>
+
+
+            <div className="filter-cont">
+                <div className="main-filt-box-wrap">
 
                     <div className="resetfilt-box">
-                        <Refresh size="18px" variant="Outline"/>
+                        <Refresh size="18px" variant="Outline" />
                         <span>Reset Filters</span>
                     </div>
                     <div className="filtbox">
                         <div className="filt-stat-cont">
                             <label >PRODUCT STATUS</label>
                             <div className="filt-stat-opts">
-                                <FilterBtns name="All" count="1345" isActive={true}/>
-                                <FilterBtns name="Active" count="45" isActive={false}/>
-                                <FilterBtns name="Inactive" count="7" isActive={false}/>
+                                <FilterBtns name="All" count="1345" isActive={true} />
+                                <FilterBtns name="Active" count="45" isActive={false} />
+                                <FilterBtns name="Inactive" count="7" isActive={false} />
                             </div>
                         </div>
                         <div className="filt-stat-cont">
                             <label >PRODUCT TYPE</label>
                             <div className="filt-stat-opts">
-                                <FilterBtns name="Retail" isActive={true}/>
-                                <FilterBtns name="Wholesale" isActive={false}/>
+                                <FilterBtns name="Retail" isActive={true} />
+                                <FilterBtns name="Wholesale" isActive={false} />
                             </div>
                         </div>
                         <div className="filt-stat-cont">
                             <label >SORT BY</label>
-                           <div className="sort-box">
-                                <SelectBox 
-                                    name="Alphabetical" 
-                                    options={["A-Z","Z-A","None"]}
+                            <div className="sort-box">
+                                <SelectBox
+                                    name="Alphabetical"
+                                    options={["A-Z", "Z-A", "None"]}
                                     ICON={ArrangeVerticalSquare}
-                                />   
-                           </div>
+                                />
+                            </div>
                         </div>
                         <div className="filt-stat-cont">
                             <label >STOCK ALERT</label>
-                           <div className="sort-box">
-                                <SelectBox 
-                                    options={["All Stock","Not Avilable","Avilable"]}
-                                    ICON={ClipboardText } 
-                                    />   
-                           </div>
+                            <div className="sort-box">
+                                <SelectBox
+                                    options={["All Stock", "Not Avilable", "Avilable"]}
+                                    ICON={ClipboardText}
+                                />
+                            </div>
                         </div>
                         <div className="filt-stat-cont">
                             <label >CATEGORY</label>
-                           <div className="sort-box">
-                                <SelectBox 
-                                    options={["All Product","Tea","Coffe","Dessert"]}
-                                    ICON={Shapes} 
-                                    />   
-                           </div>
+                            <div className="sort-box">
+                                <SelectBox
+                                    options={["All Product", "Tea", "Coffe", "Dessert"]}
+                                    ICON={Shapes}
+                                />
+                            </div>
                         </div>
 
 
                         <div className="filt-stat-cont">
                             <label >PRICE</label>
-                           <div className="price-box-cont">
+                            <div className="price-box-cont">
                                 <div className="price-box">
                                     <div className="pbl">
-                                    <DollarCircle size="20px" variant="Bold" />
+                                        <DollarCircle size="20px" variant="Bold" />
                                     </div>
                                     <div className="pbr">
-                                        <input type="number" className="money-inp" placeholder='Minimum Price'/>
+                                        <input type="number" className="money-inp" placeholder='Minimum Price' />
                                     </div>
                                 </div>
                                 <div className="price-vert-line"></div>
                                 <div className="price-box">
                                     <div className="pbl">
-                                    <DollarCircle size="20px" variant="Bold" />
+                                        <DollarCircle size="20px" variant="Bold" />
                                     </div>
                                     <div className="pbr">
-                                        <input type="text" className="money-inp" placeholder='Maximum Price'/>
+                                        <input type="text" className="money-inp" placeholder='Maximum Price' />
                                     </div>
                                 </div>
-                           </div>
+                            </div>
                         </div>
-                        <div style={{height:"40px"}}></div>
-                        </div>
+                        <div style={{ height: "40px" }}></div>
                     </div>
                 </div>
+            </div>
 
-                <div className="product-cont" >
-                    <ShowProduct variant="6" type="Men" stock="10" img={imgs[0]} />
-                    <ShowProduct variant="3" type="Women" stock="0" img={imgs[1]} />
+            <div className="product-cont" ref={animationParent} >
+                
+                { products && products?.map(prd => {
+                    return(<ShowProduct key={prd._id} data={prd} />)
+                })
+                }
+                {/* <ShowProduct variant="6" type="Men" stock="10" img={imgs[0]} /> */}
+
+                {/* <ShowProduct variant="3" type="Women" stock="0" img={imgs[1]} />
                     <ShowProduct type="Casual" stock="210" img={imgs[2]} />
                     <ShowProduct variant="4" type="Women" stock="23" img={imgs[1]} />
-                    <ShowProduct variant="2" type="Men" stock="150" img={imgs[2]} />
-                </div>
+                    <ShowProduct variant="2" type="Men" stock="150" img={imgs[2]} /> */}
+            </div>
             {/* <div className="inv-body">
                 <div className="inv-body-left">
                 </div>
@@ -194,7 +232,7 @@ function Inventory({setViewAddPrd}) {
 
         </div>
 
-  );
+    );
 }
 
 export default Inventory;

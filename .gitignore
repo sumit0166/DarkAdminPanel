@@ -15,6 +15,8 @@
 # production
 /build
 
+/src/backend/imgs
+/src/backend/tmp
 # misc
 .DS_Store
 .env.local
