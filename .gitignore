@@ -8,7 +8,7 @@
 
 # logs
 /src/backend/logs
-
+/src/backend/imgs/
 # testing
 /coverage
 /db
