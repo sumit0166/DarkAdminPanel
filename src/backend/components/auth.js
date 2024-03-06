@@ -1,5 +1,5 @@
 const logger = require("./logger");
-const { userModel, productModel } = require('./dbModals')
+const { userModel } = require('./dbModals')
 
 
 
@@ -7,7 +7,7 @@ const getLogin = (req, res) =>{
   const operation = req.query.operation;
   switch (operation) {
     case "userAuth":
-      logger.info(`--Reuest info:\n   Method : POST\n   Operation : ${operation}\n   BODY: ${JSON.stringify(req.body)}`)
+      logger.info(`--Reuest info:\n   Method : POST\n   Operation : ${operation}\n   BODY: ${JSON.stringify(req.body, null, 2)}`)
       var username = req.body.username;
       var passwd = req.body.passwd;
       userModel.findOne({ username: username })

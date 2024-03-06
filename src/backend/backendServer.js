@@ -8,7 +8,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const { userModel, productModel } = require('./components/dbModals')
+const { userModel, productModel } = require('./components/dbModals');
+const { getAllProducts } = require('./components/productService');
 
 
 
@@ -140,32 +141,13 @@ app.get('/getusers', (req, res) => {
 
 
 
-app.get('/getProudcts', (req, res) => {
-  console.log(productModel)
-  productModel.find()
-    .then(products => {
-      if(products){
-        let respJson = {
-          opStatus: 200,
-          data: products
-        }
-        res.json(respJson);
-        logger.info(`Reponse sent -> ${respJson}`);
-      } else {
-        let respJson = {
-          opStatus: 404,
-          message: "Data not found"
-        }
-        res.json(respJson);
-        logger.info(`Reponse sent -> ${respJson}`);
-      }
-    })
-    .catch( error => {
-      logger.error(`Error while fetching data from table ${error}`)
-      res.json({
-        error:error
-      })
-    })
+app.get('/getProducts', (req, res) => {
+  // if (req.query.operation) {
+    
+  // } else {
+  //   res
+  // }
+  getAllProducts(req,res);
 });
 
 

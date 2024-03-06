@@ -35,7 +35,8 @@ SartProcess (){
     done
 
     cd "$app_path" || exit 1
-    nohup "$process_name" "$script_name" > /dev/null 2>&1 &
+    "$process_name" "$script_name" 
+    # nohup "$process_name" "$script_name" > /dev/null 2>&1 &
     # "$process_name" "$script_name"
     echo "Process $script_name started."
 }
