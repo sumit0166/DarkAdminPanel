@@ -3,11 +3,12 @@ import { useRef, useState } from 'react';
 import { ArrowDown2 } from 'iconsax-react';
 // import React, { useState } from 'react';
 
-function SelectBox({isActive, options, name, ICON}) {
+function SelectBox({isActive, options, name, ICON, setSortOrder }) {
     const [selected,setSelected] = useState(options[0]);
     const [isExtended,setIsExtended] = useState(true)
     const selectBoxCont = useRef()
     const svg = useRef()
+    
     
     const extendSelect = () => {
         setIsExtended(!isExtended);
@@ -26,6 +27,9 @@ function SelectBox({isActive, options, name, ICON}) {
     }
     const handleSelected = (e) => {
         setSelected(e);
+        if(setSortOrder){
+            setSortOrder(e);
+        }
         selectBoxCont.current.style.height = "0px"; 
         selectBoxCont.current.style.padding = "0 10px";
         selectBoxCont.current.style.opacity = "0";

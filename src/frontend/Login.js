@@ -95,7 +95,7 @@ function Login() {
                         }
                         break;
 
-                    case 201:
+                    case 2001:
                         setValidCred(false)
                         username.current.value = '';
                         password.current.value = '';
@@ -107,10 +107,16 @@ function Login() {
                         setLoading(false);
                         toast.error('Request Error! \n operation not found',{ style: errorStyle, });
                         break;
+                    
+                    case 502:
+                        setLoading(false);
+                        toast.error('Database Error!' ,{ style: errorStyle, });
+                        console.error(response.data.error)
+                        break;
 
                     default:
                         setLoading(false);
-                        console.log(response.data.statusCode," - Wrong Status code");
+                        console.error(response.data.statusCode," - Wrong Status code");
                         toast.error(response.data.statusCode," - Wrong Status Code",{ style: errorStyle, });
                         break;
                 }

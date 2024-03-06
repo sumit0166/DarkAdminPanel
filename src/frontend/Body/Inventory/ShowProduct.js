@@ -3,35 +3,36 @@ import { MoreSquare } from 'iconsax-react';
 import { useState } from 'react';
 // import React, { useState } from 'react';
 
-function ShowProduct({ img, variant, type, stock, headVars }) {
+function ShowProduct({ data }) {
   const [hover, setHover] = useState(false);
 
   return (
 
     <div className="ShowProduct" >
-        <div className="photo-cont" style={{backgroundImage:`url(${img})`}}></div>
+        {/* <div className="zoomIMageCont" style={{backgroundImage:`url(${data.image})`}} ></div> */}
+        <div className="photo-cont" style={{backgroundImage:`url(${data.image})`}}></div>
         <div className="details-cont">
-          <h4>ADIDAS Neo Light Green 36</h4>
+          <h4>{data.name}</h4>
           <div className="det-opts">
-            {variant && <span className="varient">{variant} varients</span>}
+            {data.type && <span className="varient">{data.type}</span>}
             {
-               type == "Women" ? <span className="sho-type pink">&#8226; {type} Shoes</span>:<span className="sho-type blue">&#8226; {type} Shoes</span>
+               data.variant.includes("Women") ? <span className="sho-type pink">&#8226; {data.variant}</span>:<span className="sho-type blue">&#8226; { data.variant}</span>
             }
 
-            { stock != "0" && stock && <div className="stock-prods">
+            { data.stock != "0" && data.stock && <div className="stock-prods">
               <span className="splbl">&#8226; Stocked Products:</span>
-              <span> {stock} in stock</span>
+              <span> {data.stock} in stock</span>
             </div>}
           </div>
         </div>
         <div className="prod-vert-line"></div>
         <div className="retail-cont">
           <span className="price-head">RETAIL PRICE</span>
-          <h4>&#8377;180.00-&#8377;220.00</h4>
+          <h4>&#8377;{data.retail}</h4>
         </div>
         <div className="wholesale-cont">
           <span className="price-head">WHOLESALE PRICE</span>
-          <h4>&#8377;100.00-&#8377;170.00</h4>
+          <h4>&#8377;{data.wholesale}</h4>
         </div>
         <div className="more-opt-cont" 
           onMouseEnter={() => setHover(true)}

@@ -3,13 +3,23 @@ import { useState } from 'react';
 import { DocumentText1 } from 'iconsax-react';
 // import React, { useState } from 'react';
 
-function FilterBtns({isActive, name, count}) {
-
+function FilterBtns({name, count, btnProp, setBtnProp}) {
+    
+    const handleClick = () => {
+        if (btnProp !== name) {
+            setBtnProp(name);
+        }
+        else if (!btnProp) {
+            setBtnProp(name);
+        } else {
+            setBtnProp(null);
+        }
+    }
 
     return (
-        <div className={ isActive ? "FilterBtns FilterBtns-active" :"FilterBtns"} >
+        <div className={ btnProp === name ? "FilterBtns FilterBtns-active" :"FilterBtns"} onClick={handleClick} >
             <label>{name}</label>
-            {count && <div className={isActive? "filt-prod-count fpc-active" : "filt-prod-count"}>
+            {count && <div className={btnProp === name? "filt-prod-count fpc-active" : "filt-prod-count"}>
                 <span>{count}</span>
             </div>}
         </div>
