@@ -34,60 +34,24 @@ mongoose.connect('mongodb://' + config.dbHost + ':' + config.port + '/' + config
     logger.error(`Database connection error: ${error.message}`);
     // process.exit(1); // Exit the application on connection error
   });
-  app.use('/images', express.static('./imgs'));
+
+app.use('/images', express.static('./imgs'));
+
+app.use((req, res, next) => {
+  const origin = req.get('Origin');
+  // const getRef = req.get('Referer');
+  // let referer = getRef.substring(0, getRef.indexOf('/',7));
   
-  app.use((req, res, next) => {
-    const origin = req.get('Origin');
-    // const getRef = req.get('Referer');
-    // let referer = getRef.substring(0, getRef.indexOf('/',7));
-    
-    logger.info(`Request received from ${origin} -> ${req.method} - ${req.url}`);
+  logger.info(`Request received from ${origin} -> ${req.method} - ${req.url}`);
 
-    if ( origin !== config.originHost) {
-      logger.info(`response sent -> Forbidden`);
-      return res.status(403).send('Forbidden');
-    }
-    next();
-  });
-  
-  
-
-// app.post('/uploadtoTemp', upload.single('image'), (req, res) => {
-//   try {
-//     const { path: filePath, originalname } = req.file;
-//     logger.info(`Received file -> ${originalname} path -> ${filePath}`)
-
-//     const destinationPath = 'imgs/'+originalname;
-//     fs.renameSync(filePath, destinationPath);
-
-//     logger.info(`File uploaded successfully to -> ${destinationPath}`)
-//     res.json({opStatus:200, message: 'File uploaded successfully.' });
-//   } catch (err) {
-//     console.error(err);
-//     res.json({opStatus:500, error: 'Internal Server Error' });
-//   }
-// });
-
-app.post('/uploadtoTemp', upload.single('image'), (req, res) => {
-  try {
-    const { path: filePath, originalname } = req.file;
-    logger.info(`Received file -> ${originalname} upload path -> ${filePath}`)
-
-    const destinationPath = 'imgs/'+originalname;
-    fs.renameSync(filePath, destinationPath);
-    let resp = {
-      opStatus:200,
-      tempPath: filePath,
-      message: 'File uploaded successfully.'
-    }
-
-    logger.info(`Response Sent -> ${destinationPath}`)
-    res.json(resp);
-  } catch (err) {
-    console.error(err);
-    res.json({opStatus:500, error: 'Internal Server Error' });
+  if ( origin !== config.originHost) {
+    logger.info(`response sent -> Forbidden`);
+    return res.status(403).send('Forbidden');
   }
+  next();
 });
+  
+  
 
 async function processFile(filePath, originalname, productName, filedest) {
   logger.info(`Received file -> ${originalname} upload path -> ${filePath}`);
@@ -107,7 +71,7 @@ async function processFile(filePath, originalname, productName, filedest) {
   }
   }
 
-app.post('/test', upload.array('image'), async (req, res) => {
+app.post('/upload', upload.array('image'), async (req, res) => {
   var filedest = []
   try {
     const files = req.files;
@@ -142,12 +106,29 @@ app.get('/getusers', (req, res) => {
 
 
 app.get('/getProducts', (req, res) => {
-  // if (req.query.operation) {
-    
-  // } else {
-  //   res
-  // }
-  getAllProducts(req,res);
+
+  if (req.query.operation) {
+    switch (req.query.operation) {
+      case 'allProducts':
+        getAllProducts(req,res);
+        break;
+      default:
+        let resp = {
+          opStatus: 504,
+          error: "Operation NOT FOUND"
+        }
+        logger.error(`${req.query.operation} - Operation not found \n Response sent -> ${JSON.stringify(resp)}`)
+        res.json(resp)
+        break;
+    }
+  } else {
+    let resp = {
+      opStatus: 500,
+      error: "No operation provided"
+    }
+    logger.error(`Operation not provided \n Response sent -> ${JSON.stringify(resp)}`)
+    res.json(resp)
+  }
 });
 
 
@@ -164,33 +145,3 @@ app.listen(config.serverPort, () => {
   logger.info(`server is running on port > ${config.serverPort}`);
 })
 
-
-
-
-
-
-
-
-
-
-
-
-// const MongoClient = require('mongodb').MongoClient;
-
-// const uri = 'mongodb://localhost:27017';
-// const client = new MongoClient(uri);
-
-// client.connect(err => {
-//   if (err) throw err;
-
-//   const db = client.db('adminPanel');
-//   const collection = db.collection('users');
-
-//   collection.find({}).toArray((err, docs) => {
-//     if (err) throw err;
-
-//     console.log(docs);
-
-//     client.close();
-//   });
-// });

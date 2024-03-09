@@ -3,7 +3,63 @@ const { productModel } = require('./dbModals')
 
 
 function getAllProducts(req, res) {
-    productModel.find()
+  const query = [
+    {
+      $facet: {
+        uniqueVariants: [
+          {
+            $group: {
+              _id: "$variant",
+              count: { $sum: 1 }
+            }
+          },
+          {
+            $project: {
+              _id: 0,
+              variant: "$_id",
+              count: 1
+            }
+          }
+        ],
+        uniqueType: [
+          {
+            $group: {
+              _id: "$type",
+              count: { $sum: 1 }
+            }
+          },
+          {
+            $project: {
+              _id: 0,
+              type: "$_id",
+              count: 1
+            }
+          }
+        ],
+        uniqueProductType: [
+          {
+            $group: {
+              _id: "$prdoductType",
+              count: { $sum: 1 }
+            }
+          },
+          {
+            $project: {
+              _id: 0,
+              variant: "$_id",
+              count: 1
+            }
+          }
+        ],
+        allData: [
+          { $replaceRoot: { newRoot: "$$ROOT" } }
+        ]
+      }
+    }
+  ]
+
+    productModel.aggregate(query)    
+    // productModel.find() 
     .then(products => {
       if(products){
         let respJson = {

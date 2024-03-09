@@ -48,7 +48,7 @@ function AddProduct({ modalControl }) {
             formData.append('image', file);
         });
         // formData.append('image', files);
-        axios.post(config.host + '/test', formData)
+        axios.post(config.host + '/upload', formData)
             .then(response => {
                 console.log(response);
                 toast.success('Data Uploaded Sucessfully');

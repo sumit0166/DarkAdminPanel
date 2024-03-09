@@ -6,6 +6,7 @@ import { DocumentText1 } from 'iconsax-react';
 function FilterBtns({name, count, btnProp, setBtnProp}) {
     
     const handleClick = () => {
+     try {
         if (btnProp !== name) {
             setBtnProp(name);
         }
@@ -14,6 +15,10 @@ function FilterBtns({name, count, btnProp, setBtnProp}) {
         } else {
             setBtnProp(null);
         }
+     } catch (error) {
+        console.log(error);
+        btnProp = null
+     }
     }
 
     return (

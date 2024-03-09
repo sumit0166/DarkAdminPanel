@@ -1,13 +1,17 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import './SelectBox.css';
 import { ArrowDown2 } from 'iconsax-react';
 // import React, { useState } from 'react';
 
-function SelectBox({isActive, options, name, ICON, setSortOrder }) {
-    const [selected,setSelected] = useState(options[0]);
+function SelectBox({isActive, options, name, ICON, setActiveList, activeList }) {
+    const [selected,setSelected] = useState(null);
     const [isExtended,setIsExtended] = useState(true)
     const selectBoxCont = useRef()
     const svg = useRef()
+
+    useEffect(() => {setSelected(activeList) },[activeList])
+
+    useEffect(() => {setSelected(options[0])},[])
     
     
     const extendSelect = () => {
@@ -27,8 +31,8 @@ function SelectBox({isActive, options, name, ICON, setSortOrder }) {
     }
     const handleSelected = (e) => {
         setSelected(e);
-        if(setSortOrder){
-            setSortOrder(e);
+        if(setActiveList){
+            setActiveList(e);
         }
         selectBoxCont.current.style.height = "0px"; 
         selectBoxCont.current.style.padding = "0 10px";
@@ -42,7 +46,7 @@ function SelectBox({isActive, options, name, ICON, setSortOrder }) {
             <div className="selectbox-main" onClick={extendSelect} >
                 <ICON size="22" variant="Bold"/>
                 { name && <span>{name}:</span>}
-                <span className="sortSelected" >{selected == "Clear" ? "" : selected}</span>
+                <span className="sortSelected" >{selected == "None" ? "" : selected}</span>
                 <ArrowDown2 size="20" variant="Bold" ref={svg}/>
             </div>
             <div className="selectbox-opt-cont" ref={selectBoxCont}>
