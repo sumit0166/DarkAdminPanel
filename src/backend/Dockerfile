@@ -4,7 +4,7 @@ WORKDIR /root/nodeServer/app/bin
 
 COPY bin .
 COPY components ../components
-COPY config ../config
+COPY config ../configuration
 COPY node_modules ../node_modules
 COPY package.json ../
 COPY backendServer.js ../

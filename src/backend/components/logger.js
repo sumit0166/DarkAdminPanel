@@ -1,7 +1,7 @@
 const winston = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 
-const config = require('../config/appConfig.json');
+const config = require('../configuration/appConfig.json');
 const logConfig = config.logs;
 // Define the logger configuration
 

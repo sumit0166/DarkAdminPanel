@@ -60,21 +60,21 @@ function AddProduct({ modalControl }) {
     }
 
     const handleFormSubmit = (e) => {
-        // e.preventDefault()
+        e.preventDefault()
         console.log(e.target)
         const formData = new FormData(e.target);
         console.log(formData)
         files.forEach(file => {
             formData.append('image', file);
         });
-        console.log(formData.entries.length)
-        if (formData.entries.length === 0) {
-            errorNoti('Please fill all data.');
-            toast.error("Empty Data");
-            return
-        }
+        // console.log(formData.entries.length)
+        // if (formData.entries.length === 0) {
+        //     errorNoti('Please fill all data.');
+        //     toast.error("Empty Data");
+        //     return
+        // }
         
-        axios.post(config.host + '/upload', formData)
+        axios.post(config.host + '/products/uploadProduct', formData)
         .then(response => {
             console.log(response);
                 sucessNoti('Data Uploaded Sucessfully')
@@ -201,9 +201,9 @@ function AddProduct({ modalControl }) {
             <div className="mod-footer">
                 <div className="draft-btn">Save as Draft</div>
                 <div className="vert"></div>
-                {/* <button className="next-btn" type="submit" value="Submit" >Submit</button> */}
+                <button className="next-btn" type="submit" value="Submit" >Submit</button>
 
-
+                {/* Note: won't uplod if using stepwise, i think data is erasing */}
                 {step >= 2 && step <= 4 && <div className="prev-btn" onClick={prevStep}>Previous</div>}
                 {step >= 1 && step <= 3 && <div className="next-btn" onClick={nextStep}>Next</div>}
                 {step === 4 && <button className="next-btn" type="submit" value="Submit" >Submit</button>}

@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
-    username: String,
-    passwd: String,
-    roles: String
-})
 
 const prodcutSchema = new mongoose.Schema({
     name: String,
@@ -13,14 +8,13 @@ const prodcutSchema = new mongoose.Schema({
     category: String,
     brand: String,
     description: String,
-    image: String
+    image: String,
+    prdoductType: String
 })
 
 
-const userModel = mongoose.model("users",userSchema);
 const productModel = mongoose.model("products",prodcutSchema);
 
 module.exports = {
-    userModel: userModel,
-    productModel: productModel
+    productModel,
 };

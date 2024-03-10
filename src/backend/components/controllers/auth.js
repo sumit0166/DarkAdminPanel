@@ -1,5 +1,5 @@
-const logger = require("./logger");
-const { userModel } = require('./dbModals')
+const logger = require("../logger");
+const { userModel } = require('../modals/users')
 
 
 
@@ -63,4 +63,6 @@ const getLogin = (req, res) =>{
 
 
 
-module.exports = getLogin;
+module.exports = {
+  getLogin,
+};

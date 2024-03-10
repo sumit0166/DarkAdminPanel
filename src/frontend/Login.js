@@ -65,7 +65,7 @@ function Login() {
             console.log(config)
         try {
             // Make a POST request using axios
-            const response = await axios.post(config.host +'/getLogin?operation=userAuth', {username:username.current.value , passwd:password.current.value});
+            const response = await axios.post(config.host +'/login/getLogin?operation=userAuth', {username:username.current.value , passwd:password.current.value});
             console.log(response.data.statusCode);
 
                 switch (response.data.statusCode) {

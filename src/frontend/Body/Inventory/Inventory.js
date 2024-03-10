@@ -48,7 +48,7 @@ function Inventory({ setViewAddPrd }) {
 
 
     const fetchProducts = async () => {
-        axios.get(config.host + '/getProducts?operation=allProducts')
+        axios.get(config.host + '/products/getProducts?operation=allProducts')
             .then((response) => {
                 switch (response.data.opStatus) {
                     case 200:
