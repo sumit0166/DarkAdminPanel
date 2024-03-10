@@ -14,12 +14,30 @@ const response = await fetch('/config.json');
 const config = await response.json();
 
 
+const sucessNoti = (msg) => toast(msg,{
+    style:{
+      backgroundColor: '#22ca1c',
+      color: 'white',
+    },
+    icon: '✔️'
+
+  });
+
+  const errorNoti = (msg) => toast(msg,{
+      duration: 4000,
+      style:{
+        backgroundColor: 'white',
+        color: 'red',
+      },
+      icon: '😡'
+  });
 
 
 
 
 function AddProduct({ modalControl }) {
-    const [activeModalNav, setActiveModalNav] = useState(1);
+    const [step, setStep] = useState(1);
+    // const [step, setStep] = useState(1);
     const [modHeading, setModHeading] = useState("Genral Information");
     const navigate = useNavigate();
     const [files, setFiles] = useState([]);
@@ -29,34 +47,42 @@ function AddProduct({ modalControl }) {
     const [animationParent] = useAutoAnimate();
 
     const formRef = useRef(null);
-    // console.log(activeModalNav)
+    // console.log(step)
 
     const handleSubmit = (e) => {
 
-        // setActiveModalNav(activeModalNav + 1);
-        // if (activeModalNav == 4) {
-        //     setActiveModalNav(1);
+        // setStep(step + 1);
+        // if (step == 4) {
+        //     setStep(1);
         //     navigate("/Inventory")
         //     modalControl.setViewAddPrd(false);
         // }
     }
 
     const handleFormSubmit = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
+        console.log(e.target)
         const formData = new FormData(e.target);
+        console.log(formData)
         files.forEach(file => {
             formData.append('image', file);
         });
-        // formData.append('image', files);
+        console.log(formData.entries.length)
+        if (formData.entries.length === 0) {
+            errorNoti('Please fill all data.');
+            toast.error("Empty Data");
+            return
+        }
+        
         axios.post(config.host + '/upload', formData)
-            .then(response => {
-                console.log(response);
-                toast.success('Data Uploaded Sucessfully');
+        .then(response => {
+            console.log(response);
+                sucessNoti('Data Uploaded Sucessfully')
+                // toast.success();
                 setFiles([]);
                 if (formRef.current) {
                     formRef.current.reset();
                   }
-         
             })
             .catch(err => {
                 console.log(err);
@@ -66,30 +92,6 @@ function AddProduct({ modalControl }) {
     }
 
 
-
-
-
-    // useEffect(() => {
-    //     const intervalId = setInterval(() => {
-    //         // Increase count by 1 on each interval
-    //         if (uploadPerc >= 100) {
-    //             setUploadedPerc(0)
-    //         }
-    //         setUploadedPerc(prevCount => { 
-    //             if (prevCount >= 100) {
-    //                 prevCount = 0;
-
-    //             }
-    //             return prevCount >= 100 ? 0 : prevCount + Math.floor(Math.random() * 16); 
-    //         });
-    //     }, 1000); // Interval in milliseconds (0.4 seconds)
-
-    //     // Clear the interval when the component unmounts
-    //     return () => clearInterval(intervalId);
-    // }, []);
-    // useEffect(() => {
-    //     setFileCount(fileCount+1);
-    // },[files])
 
     const onDrop = (acceptedFiles) => {
         console.log('lenght ->', acceptedFiles.length, 'file-count->', files.length, 'FileCount+length', files.length + acceptedFiles.length);
@@ -123,6 +125,8 @@ function AddProduct({ modalControl }) {
     // navigate('/Inventory/addProduct?'+modHeading, { replace: true })
     useEffect(() => { navigate('/Inventory/addProduct?' + modHeading, { replace: true }) }, [modHeading])
 
+    const nextStep = () => { setStep(step + 1) }
+    const prevStep = () => { setStep(step - 1) }
 
     return (
         // <form className={ modalControl.viewAddPrd ? "AddProduct up" : "AddProduct"} >
@@ -148,15 +152,16 @@ function AddProduct({ modalControl }) {
 
             <div className="modal-mid-cont">
                 <div className="mod-body-left">
-                    <ModNav stepno="1" setModHeading={setModHeading} subhead="Genral Information" isActive={activeModalNav == 1} />
-                    <ModNav stepno="2" setModHeading={setModHeading} subhead="Sales Information" isActive={activeModalNav == 2} />
-                    <ModNav stepno="3" setModHeading={setModHeading} subhead="Quantity & Recorder" isActive={activeModalNav == 3} />
-                    <ModNav stepno="4" setModHeading={setModHeading} subhead="Measurement" isActive={activeModalNav == 4} />
+                    <ModNav stepno="1" setModHeading={setModHeading} subhead="Genral Information" isActive={step == 1} />
+                    <ModNav stepno="2" setModHeading={setModHeading} subhead="Sales Information" isActive={step == 2} />
+                    <ModNav stepno="3" setModHeading={setModHeading} subhead="Quantity & Recorder" isActive={step == 3} />
+                    <ModNav stepno="4" setModHeading={setModHeading} subhead="Measurement" isActive={step == 4} />
                 </div>
                 <div className="mod-body-right">
                     {/* <div style={{ width:'450px', height:'450px'}}>
                     <img src="http://webapp:3001/images/kpim.png" style={{ width:'450px', height:'450px'}} />
                 </div> */}
+                    { step === 1 &&
                     <div className="mbr-box1">
                         <div className="inptcont">
                             <label htmlFor="productname">Product name</label>
@@ -189,16 +194,24 @@ function AddProduct({ modalControl }) {
                         </div>
 
                     </div>
+                    }
                 </div>
             </div>
 
             <div className="mod-footer">
                 <div className="draft-btn">Save as Draft</div>
                 <div className="vert"></div>
-                <button className="next-btn" type="submit" value="Submit" >Submit</button>
-                {/* {activeModalNav > 1 && <div className="prev-btn" onClick={() => setActiveModalNav(activeModalNav - 1)}>Previous</div>} */}
-                {/* { activeModalNav < 6 && <button type={activeModalNav == 5 ? 'submit' : 'button'} className ="next-btn mfb-active" onClick={() => setActiveModalNav(activeModalNav+1)}>{activeModalNav == 4 ? "Submit" : "Next"}</button>} */}
-                {/* {<div className="next-btn" onClick={handleSubmit}>{activeModalNav == 4 ? "Submit" : "Next"}</div>} */}
+                {/* <button className="next-btn" type="submit" value="Submit" >Submit</button> */}
+
+
+                {step >= 2 && step <= 4 && <div className="prev-btn" onClick={prevStep}>Previous</div>}
+                {step >= 1 && step <= 3 && <div className="next-btn" onClick={nextStep}>Next</div>}
+                {step === 4 && <button className="next-btn" type="submit" value="Submit" >Submit</button>}
+
+
+                {/* {step > 1 && <div className="prev-btn" onClick={() => setStep(step - 1)}>Previous</div>} */}
+                {/* { step < 6 && <button type={step == 5 ? 'submit' : 'button'} className ="next-btn mfb-active" onClick={() => setStep(step+1)}>{step == 4 ? "Submit" : "Next"}</button>} */}
+                {/* {<div className="next-btn" onClick={handleSubmit}>{step == 4 ? "Submit" : "Next"}</div>} */}
             </div>
 
 
