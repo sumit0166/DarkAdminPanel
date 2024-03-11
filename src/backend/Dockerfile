@@ -4,14 +4,13 @@ WORKDIR /root/nodeServer/app/bin
 
 COPY bin .
 COPY components ../components
-COPY config ../configuration
+COPY configuration ../configuration
 COPY node_modules ../node_modules
 COPY package.json ../
 COPY backendServer.js ../
 
 RUN apt-get update && \
-    apt-get install -y jq && \
-    apt-get install -y iputils-ping \
+    apt-get install -y jq iputils-ping vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
