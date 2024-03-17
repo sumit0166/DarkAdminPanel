@@ -11,8 +11,29 @@
                 "/Sales"
             ]
         },
+        "ext_1": {
+            "accessDeniedPages": [
+                "/Order",
+                "/Sales",
+				"/Report",
+				"/Document",
+				"/Inventory"
+            ],
+            "defaultPage": "/Dashboard"
+        },
+        "ext_2": {
+            "accessDeniedPages": [
+                "/Order",
+                "/Sales",
+				"/Report",
+				"/Dashboard",
+				"/Inventory"
+            ],
+            "defaultPage": "/Document"
+        },
         "super": {
             "accessDeniedPages": []
         }
     }
-} 
+}
+

@@ -80,7 +80,8 @@ function getAllProducts(req, res) {
     .catch( error => {
       logger.error(`Error while fetching data from table ${error}`)
       res.json({
-        error:error
+        opStatus: 4004,
+        message:error
       })
     })
 }

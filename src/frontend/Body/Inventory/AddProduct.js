@@ -201,7 +201,7 @@ function AddProduct({ modalControl }) {
             <div className="mod-footer">
                 <div className="draft-btn">Save as Draft</div>
                 <div className="vert"></div>
-                <button className="next-btn" type="submit" value="Submit" >Submit</button>
+                {/* <button className="next-btn" type="submit" value="Submit" >Submit</button> */}
 
                 {/* Note: won't uplod if using stepwise, i think data is erasing */}
                 {step >= 2 && step <= 4 && <div className="prev-btn" onClick={prevStep}>Previous</div>}

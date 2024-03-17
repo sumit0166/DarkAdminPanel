@@ -1,6 +1,9 @@
 const logger = require("../logger");
 const { userModel } = require('../modals/users')
+const jwt = require('jsonwebtoken');
 
+
+const secretKey = "nodeJaApp@8082forwebsite";
 
 
 const getLogin = (req, res) =>{
@@ -15,12 +18,15 @@ const getLogin = (req, res) =>{
           
           if (users !== null) {
             if (users.username == username && users.passwd == passwd) {
+              const token = jwt.sign({ username, passwd, roles:users.roles }, secretKey, { expiresIn: '1h' });
+              // res.json({ token });
               let resp = {
                 statusCode: 200,
                 isAuthSuccesfull: true,
-                roles: users.roles
+                roles: users.roles,
+                token
               }
-              logger.info(`Authentication sucessful \n Response sent -> ${JSON.stringify(resp)}`)
+              logger.info(`Authentication sucessful \n Response sent -> ${JSON.stringify(resp,2 ,null)}`)
               res.json(resp)
             } else {
               let resp = {

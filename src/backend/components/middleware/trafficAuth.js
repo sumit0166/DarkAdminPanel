@@ -1,5 +1,6 @@
 const logger = require("../logger");
-const config = require("../../configuration/appConfig.json")
+const config = require("../../configuration/appConfig.json");
+const jwt = require('jsonwebtoken');
 
 const incomingTraffic = config.corsPolicy.incomingTraffic;
 const allowedOrigins = config.corsPolicy.allowedOrigins;
@@ -55,7 +56,41 @@ function logRequest(req, res, next) {
 
 }
 
+
+
+const verifyToken = (secretKey) => (req, res, next) => {
+    const auth = req.get('authorization');
+    const token = auth?.split(' ')[1]; // Extract token from Authorization header
+
+    if (token) {
+        jwt.verify(token, secretKey, (err, decoded) => {
+            if (err) {
+                if (err.name === 'TokenExpiredError') {
+                    logger.error(`resp -> 403 Token expired`);
+                    return res.json({ 
+                        opStatus: 440,
+                        message: 'Token expired' 
+                    });
+                  } else {
+                    logger.error(`resp -> 403 Failed to authenticate token`);
+                    return res.json({
+                        opStatus: 403,
+                        message: 'Failed to authenticate token' });
+                  }
+            } else {
+                logger.info(`Authentication sucessfull`);
+                req.decoded = decoded; // Save decoded token payload for later use
+                next();
+            }
+        });
+    } else {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+};
+
+
 module.exports = {
     logRequest,
-    corsOptions
+    corsOptions,
+    verifyToken
 }

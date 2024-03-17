@@ -12,8 +12,8 @@ const config = require('./configuration/appConfig.json');
 const productRouter  = require('./components/routers/products');
 const loginRouter  = require('./components/routers/login');
 
-
-const { logRequest, corsOptions } = require('./components/middleware/trafficAuth');
+const secretKey = "nodeJaApp@8082forwebsite";
+const { logRequest, corsOptions, verifyToken } = require('./components/middleware/trafficAuth');
 
 
 const app = express();
@@ -23,7 +23,6 @@ const app = express();
 
 app.use((req, res, next) => {
   logRequest(req, res, next);
-
 });
 
 app.use(cors(corsOptions));
