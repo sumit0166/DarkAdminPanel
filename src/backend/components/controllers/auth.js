@@ -21,7 +21,7 @@ const getLogin = (req, res) =>{
               const token = jwt.sign({ username, passwd, roles:users.roles }, secretKey, { expiresIn: '1h' });
               // res.json({ token });
               let resp = {
-                statusCode: 200,
+                opStatus: 200,
                 isAuthSuccesfull: true,
                 roles: users.roles,
                 token
@@ -30,7 +30,7 @@ const getLogin = (req, res) =>{
               res.json(resp)
             } else {
               let resp = {
-                statusCode: 200,
+                opStatus: 2001,
                 isAuthSuccesfull: false,
               }
               logger.info(`Authentication failed \n Response sent -> ${JSON.stringify(resp)}`)
@@ -38,7 +38,7 @@ const getLogin = (req, res) =>{
             }
           } else {
             let resp = {
-              statusCode: 2001,
+              opStatus: 2002,
               isAuthSuccesfull: false,
             }
             logger.info(`>> Match not found in db \n response sent -> ${JSON.stringify(resp)} `)
@@ -47,8 +47,8 @@ const getLogin = (req, res) =>{
         })
         .catch(err => {
           let resp = {
-            statusCode: 502,
-            error: err
+            opStatus: 502,
+            message: `Databse Error ${err}`
           }
           logger.error(`Databse Error ${err} \n response sent -> ${JSON.stringify(resp)}`);
           res.json(resp);
@@ -58,8 +58,8 @@ const getLogin = (req, res) =>{
 
     default:
       let response = {
-        statusCode: 400,
-        description: 'operation not found'
+        opStatus: 400,
+        message: 'operation not found'
       }
       logger.info(`operatin not found, res  josn ${response}`);
       res.json(response)
@@ -71,4 +71,5 @@ const getLogin = (req, res) =>{
 
 module.exports = {
   getLogin,
+  secretKey
 };

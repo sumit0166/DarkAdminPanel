@@ -71,7 +71,7 @@
 	font-weight: 600;
 }
 
-.field > input {
+.field > input, #selectRole {
 	position: relative;
 	width: 100%;
 	height: 45px;
@@ -85,9 +85,15 @@
 	font-size: 15 px;
 }
 
-.field > input:focus {
+.field > input:focus, #selectRole:focus {
 border-color: var(--primary);
 }
+
+
+
+/* #selectRole:hover {
+	background-color: var(--primary);
+} */
 
 .showpass{
 	position: absolute;

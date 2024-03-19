@@ -10,10 +10,10 @@ const config = require('./configuration/appConfig.json');
 
 
 const productRouter  = require('./components/routers/products');
-const loginRouter  = require('./components/routers/login');
+const loginRouter  = require('./components/routers/iam');
 
 const secretKey = "nodeJaApp@8082forwebsite";
-const { logRequest, corsOptions, verifyToken } = require('./components/middleware/trafficAuth');
+const { logRequest, corsOptions } = require('./components/middleware/trafficAuth');
 
 
 const app = express();
@@ -31,7 +31,7 @@ app.use('/images', express.static('/imgs'));
 
 
 app.use("/products", productRouter);
-app.use("/login", loginRouter);
+app.use("/IAM", loginRouter);
 
 
 // app.post('/upload', upload.array('image'), async (req, res) => {

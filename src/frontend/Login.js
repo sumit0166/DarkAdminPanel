@@ -7,6 +7,7 @@ import { EyeSlash, Eye, CloudConnection } from 'iconsax-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 import axios from 'axios';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 // import config from '../config.json'
 
 const response = await fetch('/config.json');
@@ -19,14 +20,18 @@ const config = await response.json();
 
 function Login() {
     const [validCred, setValidCred] = useState(true);
-    const [showPass, setShowPass] = useState(false)
-    const [isLoding, setLoading] = useState(false)
+    const [showPass, setShowPass] = useState(false);
+    const [isLoding, setLoading] = useState(false);
+    const [showSignUp, setShowSignUp] = useState(false);
+    const [animateLogin] = useAutoAnimate();
+
     // const [defaultPage, setDefaultPage] = useState("");
     const dispatch = useDispatch();
     const username = useRef(null);
     const password = useRef(null);
+    const role = useRef(null);
     const navigate = useNavigate();
-
+    const configData = config.roles;
 
     var errorStyle = {
         width: '80%',
@@ -82,134 +87,217 @@ function Login() {
         setLoading(true);
     }
 
-
-
-
-    const handleSubmit = async (e) => {
+    const handelSignUp = async (e) => {
         e.preventDefault();
         setLoading(true);
-        console.log(username.current.value, password.current.value);
-        if (username.current.value !== '' && password.current.value !== '') {
-            console.log(config)
-            try {
-                // Make a POST request using axios
-                const response = await axios.post(config.host + '/login/getLogin?operation=userAuth', { username: username.current.value, passwd: password.current.value });
-                console.log(response.data.statusCode);
-
-                switch (response.data.statusCode) {
-                    case 200:
-                        if (response.data.isAuthSuccesfull) {
-                            handleSucessfulLogin(response.data);
-                        } else {
-                            setValidCred(false)
-                            username.current.value = '';
-                            password.current.value = '';
-                            toast.error("Wrong Userame or Password.\n Please try again...", {
-                                style: errorStyle,
-                            });
-                            setLoading(false);
-                        }
-                        break;
-
-                    case 2001:
-                        setValidCred(false)
-                        username.current.value = '';
-                        password.current.value = '';
-                        setLoading(false);
-                        toast.error('User not found, Please try again', { style: errorStyle, });
-                        break;
-
-                    case 400:
-                        setLoading(false);
-                        toast.error('Request Error! \n operation not found', { style: errorStyle, });
-                        break;
-
-                    case 502:
-                        setLoading(false);
-                        toast.error('Database Error!', { style: errorStyle, });
-                        console.error(response.data.error)
-                        break;
-
-                    default:
-                        setLoading(false);
-                        console.error(response.data.statusCode, " - Wrong Status code");
-                        toast.error(response.data.statusCode, " - Wrong Status Code", { style: errorStyle, });
-                        break;
-                }
-            } catch (error) {
-                // Handle errors
-                console.log(error);
-                setLoading(false);
-                // toast.error(error.message.toLowerCase(),{
-                //     style: errorStyle,
-                // });
-                // dispatch(loggedout())
-            }
-        } else {
-            setValidCred(false)
+        console.log(username.current.value,password.current.value,role.current.value )
+        if (username.current.value === '' || password.current.value === '' || role.current.value === 'none') {
+            setValidCred(false);
             toast.error("Please provide all fields", {
                 style: errorStyle,
             });
             setLoading(false);
+            return;
         }
+        
+        try {
+            const response = await axios.put(config.host + '/IAM', { username: username.current.value, passwd: password.current.value, roles: role.current.value });
+            console.log(response.data.opStatus);
+            switch (response.data.opStatus) {
+                case 200:
+                    setLoading(false);
+                    username.current.value = '';
+                    password.current.value = '';
+                    role.current.value = "none";
+                    toast.success(response.data.message);
+                    break;
+                default:
+                    username.current.value = '';
+                    password.current.value = '';
+                    role.current.value = "none";
+                    toast.error(response.data.message, {
+                        style: errorStyle,
+                    });
+                    setLoading(false);
+            }
+        }catch (error) {
+            console.log("108",error);
+            toast.error(error.message);
+            setLoading(false);
+        }
+
+}
+
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    console.log(username.current.value, password.current.value);
+    if (username.current.value !== '' && password.current.value !== '') {
+        console.log(config)
+        try {
+            // Make a POST request using axios
+            const response = await axios.post(config.host + '/IAM/getLogin?operation=userAuth', { username: username.current.value, passwd: password.current.value });
+            console.log(response.data.opStatus);
+
+            switch (response.data.opStatus) {
+                case 200:
+                    handleSucessfulLogin(response.data);
+                    break;
+
+                case 2001:
+                    setValidCred(false)
+                    username.current.value = '';
+                    password.current.value = '';
+                    toast.error("Wrong Userame or Password.\n Please try again...", {
+                        style: errorStyle,
+                    });
+                    setLoading(false);
+                    break;
+
+                case 2002:
+                    setValidCred(false)
+                    username.current.value = '';
+                    password.current.value = '';
+                    setLoading(false);
+                    toast.error('User not found, Please try again', { style: errorStyle, });
+                    break;
+
+                // case 400:
+                //     setLoading(false);
+                //     toast.error('Request Error! \n operation not found', { style: errorStyle, });
+                //     break;
+
+                // case 502:
+                //     setLoading(false);
+                //     toast.error('Database Error!', { style: errorStyle, });
+                //     console.error(response.data.error)
+                //     break;
+
+                default:
+                    setLoading(false);
+                    console.error(`${response.data.opStatus} - ${response.data.message}`);
+                    toast.error(`${response.data.opStatus} - ${response.data.message}`, { style: errorStyle, });
+                    break;
+            }
+        } catch (error) {
+            // Handle errors
+            console.log(error);
+            setLoading(false);
+            // toast.error(error.message.toLowerCase(),{
+            //     style: errorStyle,
+            // });
+            // dispatch(loggedout())
+        }
+    } else {
+        setValidCred(false)
+        toast.error("Please provide all fields", {
+            style: errorStyle,
+        });
+        setLoading(false);
     }
+}
 
 
-    return (
-        <div className="container">
-            <form className="login-box" onSubmit={e => handleSubmit(e)}>
-                <div className="top">
-                    <CloudConnection size="90" color="var(--primary)" variant="TwoTone" />
-                </div>
-                <div className="bottom">
-                    <div className="heading"><span>Login</span></div>
-                    <div className="fields">
-                        <div className="field">
-                            <label htmlFor="username">Username</label>
-                            <input
-                                style={{ borderColor: !validCred ? "red" : "" }}
-                                type="text"
-                                name='username'
-                                ref={username}
-                                // value={postData.username} onChange={handleInputChange}
-                                onChange={() => setValidCred(true)}
-                            />
-                        </div>
-                        <div className="field">
-                            <label htmlFor="Password">Password</label>
-                            <input
-                                style={{ borderColor: !validCred ? "red" : "" }}
-                                type={showPass ? "text" : "password"}
-                                name='passwd'
-                                ref={password}
-                                // value={postData.passwd} onChange={handleInputChange}
-                                onChange={() => setValidCred(true)}
-                            />
-                            <div className="showpass" onClick={() => setShowPass(!showPass)} >
-                                {/* <Eye size="22" color="#39db7d"/> */}
-                                {showPass ? <EyeSlash size="20" color="#92a1a7" /> : <Eye size="20" color="#304750" />}
-                            </div>
+return (
+    <div className="container">
+        <form className="login-box"
+            onSubmit={e => {
+                if (showSignUp) {
+                    handelSignUp(e);
+                } else {
+                    handleSubmit(e);
+                }
+            }}
+        >
+            <div className="top">
+                <CloudConnection size="90" color="var(--primary)" variant="TwoTone" />
+            </div>
+            <div className="bottom">
+                {!showSignUp ? <div className="heading"><span>Login</span></div> : <div className="heading"><span>SignUp</span></div>}
+                <div className="fields" ref={animateLogin}>
+                    <div className="field">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            style={{ borderColor: !validCred ? "red" : "" }}
+                            type="text"
+                            name='username'
+                            ref={username}
+                            // value={postData.username} onChange={handleInputChange}
+                            onChange={() => setValidCred(true)}
+                        />
+                    </div>
+                    {showSignUp && <div className="field">
+                        <label htmlFor="username">Role</label>
+                        <select 
+                            name="role" 
+                            id="selectRole"
+                            style={{ borderColor: !validCred ? "red" : "" }}
+                            ref={role}
+                            onChange={() => setValidCred(true)}
+                        >
+                            <option value="none" disabled selected>Select Role</option>
+                            {Object.entries(configData)?.map(key => {
+                                console.log(key[0])
+                                return(<option value={key[0]}>{key[0]}</option>)
+                            })}
+                        </select>
+                    </div>}
+                    <div className="field">
+                        <label htmlFor="Password">Password</label>
+                        <input
+                            style={{ borderColor: !validCred ? "red" : "" }}
+                            type={showPass ? "text" : "password"}
+                            name='passwd'
+                            ref={password}
+                            // value={postData.passwd} onChange={handleInputChange}
+                            onChange={() => setValidCred(true)}
+                        />
+                        <div className="showpass" onClick={() => setShowPass(!showPass)} >
+                            {/* <Eye size="22" color="#39db7d"/> */}
+                            {showPass ? <EyeSlash size="20" color="#92a1a7" /> : <Eye size="20" color="#304750" />}
                         </div>
                     </div>
-                    <div className="options">
-                        {/* <div className="rem">
+                </div>
+                <div className="options">
+                    {/* <div className="rem">
                             <input type="checkbox" name='remember'/>
                             <label htmlFor="remember">Keep me login</label>
                         </div> */}
-                        <div className="forgot">
-                            <span>Forgotten your password?</span>
-                        </div>
-                    </div>
+                    {!showSignUp && <div className="forgot">
+                        <span>Forgotten your password?</span>
+                    </div>}
+
+                </div>
+
+
+
+
+                {showSignUp ? <button type="submit" className="logIn" onClick={handelSignUp} disabled={!validCred}>
+                    <span>SignUp</span>
+                    {isLoding && <div className="loading"></div>}
+                </button>
+                    :
                     <button type="submit" className="logIn" disabled={!validCred}>
                         <span>Login</span>
                         {isLoding && <div className="loading"></div>}
-
-
                     </button>
-                </div>
-            </form>
-        </div>
-    )
+                }
+
+
+                {!showSignUp ? <div className="forgot" style={{ color: 'var(--primary)', cursor: 'pointer' }}
+                    onClick={() => setShowSignUp(true)}
+                >
+                    <span>Register</span>
+                </div>:<div className="forgot" style={{ color: 'var(--primary)', cursor: 'pointer' }}
+                    onClick={() => setShowSignUp(false)}
+                >
+                    <span>Login</span>
+                </div>}
+            </div>
+        </form>
+    </div>
+)
 
 
 }
