@@ -3,6 +3,7 @@
   "dbHost": "localhost",
   "port":"27017",
   "dbName":"adminPanel",
+  "version": "0.0.6",
   "sesionTimeout": "2h",
   "corsPolicy": {
     "incomingTraffic": "allowedOnly",

@@ -79,7 +79,7 @@ function Header({headVars}) {
       </div>
       <div className="h-right">
         <div className="rght-btns-box" >
-          { roles.includes("super") && <div className="rght-btn" id='setting-btn' onClick={toogleModes}>
+          { roles.includes("super") && <div className="rght-btn" id='setting-btn' onClick={() => {navigate('/Settings')}}>
             <Setting2 size="20" variant="Bold"/>
           </div>}
           <div className="rght-btn" id='noti-btn' onClick={getNotis}>

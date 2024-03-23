@@ -31,7 +31,7 @@ app.use('/images', express.static('/imgs'));
 
 
 app.use("/products", productRouter);
-app.use("/IAM", loginRouter);
+app.use("/iam", loginRouter);
 
 
 // app.post('/upload', upload.array('image'), async (req, res) => {

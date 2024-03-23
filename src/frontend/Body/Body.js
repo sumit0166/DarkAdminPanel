@@ -1,10 +1,12 @@
 import './Body.css';
-import View from './View/View';
+// import View from './View/View';
 import Inventory from './Inventory/Inventory';
+import Settings from './Settings/Settings';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-const response = await fetch('/config.json');
-const config = await response.json();
+// const response = await fetch('/config.json');
+// const config = await response.json();
 
 const NotFound = () => {
   
@@ -46,6 +48,7 @@ const styles = {
 function Body({headVars}) {
   const [animationParent] = useAutoAnimate();
   const invePage = <Inventory setViewAddPrd={headVars.setViewAddPrd}/>;
+  const SettingsPage = <Settings />;
 
   var pages = ["Dashboard", "Sales", "Order", "Report", "Document"]
   return (
@@ -54,6 +57,9 @@ function Body({headVars}) {
 
       <Routes>
         <Route path="/Inventory" element={invePage} />
+        <Route path='/Settings' element={SettingsPage} />
+
+
         {/* <Route index={2} path="/Dashboard" element={<TestPage name="Dashboard" />}  /> */}
         {
           pages.map( key => {

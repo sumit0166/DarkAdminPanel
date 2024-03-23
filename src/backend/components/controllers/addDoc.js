@@ -3,7 +3,7 @@ const { userModel } = require('../modals/users')
 const jwt = require('jsonwebtoken');
 
 
-const secretKey = "nodeJaApp@8082forwebsite";
+const { secretKey } = require('./auth');
 
 
 const addUser = (req, res) => {
@@ -12,14 +12,15 @@ const addUser = (req, res) => {
             opStatus: 500,
             message: 'Empty body received'
         }
-        looger.info(`Empty body received - Response sent -> ${resp}`);
+        looger.info(`Empty body received - Response sent -> ${JSON.stringify(resp)}`);
         res.json(resp);
     }
-    // var username = req.body.username;
-    // var passwd = req.body.passwd;
-    // var roles = req.body.passwd;
+    var username = req.body.username;
+    console.log(secretKey)
+    var passwd = btoa(secretKey+"_#"+btoa(req.body.passwd));
+    var roles = req.body.roles;
     console.log(req.body);
-    userModel.create(req.body)
+    userModel.create({username, passwd, roles})
         .then(() => {
             let resp= {
                 opStatus: 200,
