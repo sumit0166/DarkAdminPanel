@@ -4,6 +4,7 @@
     "host": "http://webapp:3001",
     "defaultPage": "/Inventory",
     "maxImageUpload": 4,
+    "version":"1.0.1",
     "roles" : {
         "read_only": {
             "accessDeniedPages": [
