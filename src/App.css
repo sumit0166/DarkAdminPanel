@@ -4,7 +4,10 @@
   transition-duration: 500ms;
   transition-timing-function: ease-in;
 } */
-
+*{
+  padding: 0;
+  margin: 0;
+}
 .App-dark {
   text-align: center;
   background-color: #DFE7F0;
@@ -18,6 +21,10 @@
   --pri-color: #74817f;
   --primary-bg-transp: #39db7d2b;
   --inv-search-box: #010a0e;
+}
+p{
+  margin: 0;
+  padding: 0;
 }
 
 .App{

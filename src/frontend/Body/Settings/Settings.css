@@ -1,5 +1,49 @@
 .Settings{
     color: black;
-    height: 100vh;
-    background: pink;
+    /* height: 80vh; */
+    /* background: white !important; */
+    padding: 0 !important;
+    display: flex;
+    color: white;
+}
+.Settings > .leftMenu{
+    position: relative;
+    box-sizing: border-box;
+    padding: 20px;
+    flex: 1;
+    box-shadow: 8px 5px 12px #080e105c;
+    text-align: left;
+}
+
+.Settings > .rightPageCont{
+    flex: 4;
+    position: relative;
+    box-sizing: border-box;
+}
+.MenuButton {
+    position: relative;
+    box-sizing: border-box;
+    padding: 8px 15px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    gap: 4%;
+   
+    /* transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in; */
+}
+
+.MenuButton:hover {
+    color: var(--primary);
+    background: var(--primary-bg-transp);
+}
+
+.MenuButton-active {
+    color: var(--primary);
+    background: var(--primary-bg-transp);
 }

@@ -6,8 +6,7 @@
     box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    /* Your CSS properties here */
+/* h1, h2, h3, h4, h5, h6 {
     display: block;
     font-size: unset;
     margin-block-start: 0;
@@ -15,4 +14,4 @@ h1, h2, h3, h4, h5, h6 {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     font-weight: bold;
-}
+} */
