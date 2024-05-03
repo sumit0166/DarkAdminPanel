@@ -1,0 +1,40 @@
+{
+    "sessionExpiredType" : "Hrs",
+    "sessionExpiredTime": 5,
+    "host": "http://webapp:8081",
+    "defaultPage": "/Settings",
+    "maxImageUpload": 4,
+    "version":"1.0.2",
+    "roles" : {
+        "read_only": {
+            "accessDeniedPages": [
+                "/Order",
+                "/Sales"
+            ]
+        },
+        "ext_1": {
+            "accessDeniedPages": [
+                "/Order",
+                "/Sales",
+				"/Report",
+				"/Document",
+				"/Inventory"
+            ],
+            "defaultPage": "/Dashboard"
+        },
+        "ext_2": {
+            "accessDeniedPages": [
+                "/Order",
+                "/Sales",
+				"/Report",
+				"/Dashboard",
+				"/Inventory"
+            ],
+            "defaultPage": "/Document"
+        },
+        "super": {
+            "accessDeniedPages": []
+        }
+    }
+}
+
