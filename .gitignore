@@ -15,7 +15,7 @@
 /db
 # production
 /build
-
+/clean/_logs
 /src/backend/imgs
 /src/backend/tmp
 # misc
