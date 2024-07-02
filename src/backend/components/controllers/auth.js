@@ -12,6 +12,7 @@ const getLogin = (req, res) => {
     switch (operation) {
       case "userAuth":
         logger.info(`--Reuest info:\n   Method : POST\n   Operation : ${operation}\n   BODY: ${JSON.stringify(req.body, null, 2)}`)
+        //console.log('---------- Request body ---------\n',req.body,'\n -------- END -----------')
         var username = req.body.username;
         var passwd = req.body.passwd;
         userModel.findOne({ username: username })
@@ -92,6 +93,7 @@ const decryprtPass = (value) => {
 const getLoginHash = async (req, res) => {
   const operation = req.query.operation;
   logger.info(`--Reuest info:\n   Method : POST\n   Operation : ${operation}\n   BODY: ${JSON.stringify(req.body, null, 2)}`)
+  console.log('---------- Request body ---------\n',req.body,'\n -------- END -----------')
   var username = req.body.username;
   var passwd = req.body.passwd;
   try {

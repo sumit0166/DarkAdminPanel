@@ -7,6 +7,7 @@
 /src/backend/node_modules
 /loadBal/node_modules
 # logs
+/src/backend/node_modules
 /src/backend/logs
 /src/backend/imgs/
 # testing

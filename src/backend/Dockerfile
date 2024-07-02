@@ -10,7 +10,7 @@ COPY package.json ../
 COPY backendServer.js ../
 
 RUN apt-get update && \
-    apt-get install -y jq iputils-ping vim && \
+    apt-get install -y jq iputils-ping vim zip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -18,7 +18,7 @@ RUN chmod 777 ./installDep.sh
 
 RUN ./installDep.sh
 
-EXPOSE 3001
+EXPOSE 8082
 
 # CMD [ "node", "backendServer.js" ]
 CMD [ "bash" , "Run.sh"]

@@ -9,6 +9,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.5",
+    "bcryptjs": "^2.4.3",
     "core-util-is": "^1.0.3",
     "easybase-react": "^2.2.13",
     "firebase": "^9.15.0",

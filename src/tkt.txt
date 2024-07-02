@@ -1,18 +1,25 @@
 db.users.createOnce({
-username: "admin",
-passwd: "1234",
-roles: ["super"]
-})
-
+    username: 'admin',
+    passwd: 'bm9kZUphQXBwQDgwODJmb3J3ZWJzaXRlXyNNVEl6TkE9PQ==',
+    roles: 'super',
+    createdAt: ISODate('2024-05-03T17:41:56.995Z'),
+    updatedAt: ISODate('2024-05-03T17:41:56.995Z'),
+    docVersion: 0
+  }
+)
 
 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
 
 docker run -d --name dashboard -v /root/node/dash:/root/node/app --net node -p 3000:3000 nodeapp
 docker run -d -p 27017:27017 --name mongodb mongo
 
+
+install nodejs and npm using nvm. to install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+To test that nvm was properly installed, close and re-open Terminal and enter nvm. If you get a nvm: command not found message, your OS may not have the necessary .bash_profile file. In Terminal, enter touch ~/.bash_profile and run the above install script again.
+
 FROM node:latest
-WORKDIR /root/node/app
-RUN npm install
+WORKDIR /root/node/app/
 CMD ["npm", "start"]
 
 
@@ -23,11 +30,11 @@ docker run -d --name mongodb --network nodeapp -v /root/node/dash/db:/data/db -p
 docker run -d --name mongo-express --network nodeapp -p 8081:8081 -e ME_CONFIG_MONGODB_SERVER=mongodb -e ME_CONFIG_MONGODB_PORT=27017 mongo-express
 
 
-docker run -it --network nodeapp --name backend -p 8082:3001 backend_server
+docker run -itd --network nodeapp --name backend -p 8082:8082 backend_server
 
 
 docker build -t backend_server .
-docker run -it --network nodeapp --name backend -p 3001:3001 backend_server
+docker run -itd --network nodeapp --name backend -p 3001:3001 backend_server
 
 
 

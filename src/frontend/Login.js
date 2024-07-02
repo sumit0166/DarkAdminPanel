@@ -16,7 +16,13 @@ const config = await response.json();
 
 const bcrypt = require('bcryptjs');
 
-
+const requestOptions= {
+    headers: {
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
+    }
+}
+//  application/json multipart/form-data application/x-www-form-urlencoded
 // import app from '../backend/database';
 
 
@@ -149,7 +155,11 @@ function Login() {
             try {
                 // Make a POST request using axios
                 const hashPassword = await getHashPassword(password.current.value)
-                const response = await axios.post(config.host + '/iam/getLogin?operation=userAuthHash', { username: username.current.value, passwd: hashPassword });
+                const response = await axios.post(config.host + '/iam/getLogin?operation=userAuthHash', 
+                    // `username=${encodeURIComponent(username.current.value)}&passwd=${encodeURIComponent(hashPassword)}`,
+                    { username: username.current.value, passwd: hashPassword }, 
+                    requestOptions
+                );
                 console.log(response.data.opStatus);
 
                 switch (response.data.opStatus) {
