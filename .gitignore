@@ -5,7 +5,8 @@
 /.pnp
 .pnp.js
 /src/backend/node_modules
-/loadBal/node_modules
+*/node_modules
+*/logs
 # logs
 /src/backend/node_modules
 /src/backend/logs
