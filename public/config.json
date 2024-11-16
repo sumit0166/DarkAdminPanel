@@ -1,7 +1,7 @@
 {
     "sessionExpiredType" : "Hrs",
     "sessionExpiredTime": 5,
-    "host": "http://webapp:3001",
+    "host": "http://webapp:8082",
     "defaultPage": "/Settings",
     "maxImageUpload": 4,
     "version":"1.0.2",

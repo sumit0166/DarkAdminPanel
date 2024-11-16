@@ -21,7 +21,7 @@ const NotFound = () => {
 
 const TestPage = ({name}) => {
   return(
-    <div className={name} style={{height: "100vh",  background: '#DFE7F0'}}>
+    <div className={name} style={{  color: '#DFE7F0'}}>
       <center><h1><strong>{name}</strong></h1></center>
     </div>
   )
