@@ -1,0 +1,165 @@
+.Microservices{
+    padding-left : 20px;
+    padding-top: 10px;
+    text-align: left;
+}
+.Microservices > .cont{
+    box-sizing: border-box;
+    position: relative;
+    padding: 10px;
+    max-width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+.mscard-cont{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    font-size: 20px;
+}
+.MScard{
+    box-sizing: content-box;
+    display: block;
+    position: relative;
+    width: 260px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: #024F6D;
+    margin-bottom: 20px;
+}
+
+.msHead{
+    display: block;
+    position: relative;
+    height: 30%;
+}
+.msHead {
+    color: #85D6F6;
+    font-weight: 500;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.msBody{
+    background-color: #013549;
+    display: block;
+    position: relative;
+    height: 70%;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.up-cont,.down-cont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 500;
+}
+.up-cont{
+    color: #A4FF8E;
+}
+.down-cont{
+    color: #FF8E8E
+}
+.upc-l,.dwc-l{
+    display: flex;
+    gap: 2%;
+    align-items: center;
+
+}
+
+/* .MScard{
+    display: block;
+    position: relative;
+    width: auto;
+    min-width: 550px;
+    height: 300px;
+    background-color: #024F6D;
+    border-radius: 20px;
+} */
+
+/* .msc-top{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.msct-left > span{
+    position: relative;
+
+    color: #85D6F6;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.msct-right{
+    position: relative;
+    font-size: 24px;
+    font-weight: 400;
+    display: flex;
+    gap: 30px;
+}
+.msct-right > div{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
+}
+.upcount, .downcount{
+    margin-left: 5px;
+    font-weight: 500;
+}
+.msctr-up{
+    color: #A4FF8E;
+}
+.msctr-down{
+    color: #FF8E8E;
+}
+
+.msc-bot{
+    position: relative;
+    background: #013549;
+    height: 100%;
+    border-radius: 20px;
+    padding-top: 10px;
+}
+.msc-bot > table{
+    position: relative;
+    font-size: 16px;
+    padding: 0 10px;
+    width: 100%;
+    border: none;
+    border-spacing: 15px
+}
+
+thead {
+    color: #CCFFFA;
+    border-bottom: 1px solid white !important;
+}
+table th {
+    position: relative;
+    text-align: left;
+    margin-top: 10px;
+}
+
+table  td {
+    position: relative;
+    color: white;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 12px;
+} */
+
+
+
+
