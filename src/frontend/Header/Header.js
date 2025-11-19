@@ -36,7 +36,8 @@ function Header({headVars}) {
   
   async function getNotis() {
     try {
-      const response = await axios.get(config.host +'/getusers');
+      const response = await axios.get('/api/getusers');
+      // const response = await axios.get(config.host +'/getusers');
       console.log(response.data);
     } catch (error) {
       console.error(`Got ERROR while fetching info ${error}`)

@@ -118,7 +118,8 @@ function Login() {
         try {
             const hashPassword = await getHashPassword(password.current.value);
 
-            const response = await axios.put(config.host + '/iam', { username: username.current.value, passwd: password.current.value, roles: role.current.value });
+            const response = await axios.put('/api/iam', { username: username.current.value, passwd: password.current.value, roles: role.current.value });
+            // const response = await axios.put(config.host + '/iam', { username: username.current.value, passwd: password.current.value, roles: role.current.value });
             console.log(response.data.opStatus);
             switch (response.data.opStatus) {
                 case 200:
@@ -155,7 +156,8 @@ function Login() {
             try {
                 // Make a POST request using axios
                 const hashPassword = await getHashPassword(password.current.value)
-                const response = await axios.post(config.host + '/iam/getLogin?operation=userAuthHash', 
+                const response = await axios.post('/api/iam/getLogin?operation=userAuthHash', 
+                // const response = await axios.post(config.host + '/iam/getLogin?operation=userAuthHash', 
                     // `username=${encodeURIComponent(username.current.value)}&passwd=${encodeURIComponent(hashPassword)}`,
                     { username: username.current.value, passwd: hashPassword }, 
                     requestOptions

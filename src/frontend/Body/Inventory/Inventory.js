@@ -56,7 +56,8 @@ function Inventory({ setViewAddPrd }) {
     // console.log("login -->" , login);
 
     const fetchProducts = async () => {
-        axios.get(config.host + '/products/getProducts?operation=allProducts', {
+        axios.get('/api/products/getProducts?operation=allProducts', {
+        // axios.get(config.host + '/products/getProducts?operation=allProducts', {
             headers: {
                 'Authorization': `Bearer ${login.token}`
             }

@@ -2,6 +2,7 @@
   "name": "dash",
   "version": "0.0.1",
   "private": true,
+  "proxy": "http://backend:8082",
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
     "@reduxjs/toolkit": "^1.9.1",

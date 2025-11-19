@@ -74,7 +74,8 @@ function AddProduct({ modalControl }) {
         //     return
         // }
         
-        axios.post(config.host + '/products/uploadProduct', formData)
+        axios.post('/api/products/uploadProduct', formData)
+        // axios.post(config.host + '/products/uploadProduct', formData)
         .then(response => {
             console.log(response);
                 sucessNoti('Data Uploaded Sucessfully')

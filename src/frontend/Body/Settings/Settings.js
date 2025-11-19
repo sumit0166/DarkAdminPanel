@@ -75,7 +75,7 @@ function Settings() {
       <div className="rightPageCont" ref={animateParent}>
         {activePage === "Personalize" && <Personalise />}
         {activePage === "User Management" && <IAM />}
-        {activePage === "Microservices" && <Microservices />} 
+        {activePage === "-******" && <Microservices />} 
         {/* <Microservices /> */}
       </div>
     </div>
