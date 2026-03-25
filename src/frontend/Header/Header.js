@@ -62,7 +62,7 @@ function Header({headVars}) {
 
       <div className="h-left">
         <OceanProtocol size="38" color="#39db7d" variant="Bold"/>
-        <span>Test</span>
+        <span>adminPanel</span>
       </div>
       <div className="h-middle">
 

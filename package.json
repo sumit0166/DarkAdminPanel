@@ -2,20 +2,13 @@
   "name": "dash",
   "version": "0.0.1",
   "private": true,
-  "proxy": "http://backend:8082",
+  "proxy": "http://localhost:8082",
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
     "@reduxjs/toolkit": "^1.9.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.5",
-    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
-    "core-util-is": "^1.0.3",
-    "easybase-react": "^2.2.13",
     "iconsax-react": "^0.0.8",
-    "jsonwebtoken": "^9.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
@@ -23,7 +16,6 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",
-    "react-text-transition": "^3.1.0",
     "redux-persist": "^6.0.0",
     "web-vitals": "^2.1.4"
   },
@@ -50,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "depcheck": "^1.4.7"
   }
 }

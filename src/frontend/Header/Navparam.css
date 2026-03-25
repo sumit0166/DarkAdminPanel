@@ -9,13 +9,13 @@
     box-sizing: border-box;
     padding: 8px 10px;
     color: var(--pri-color);
-    border: 1px solid var(--border-color);
+    /* border: 1px solid var(--border-color); */
     gap : 5px;
     font-size: 12px;
     font-weight: 600;
     display: flex;
     align-items: center;
-    border-radius: 50px;
+    border-radius: 5px;
     cursor: pointer;
     background: none;
     transition-property: transform;
